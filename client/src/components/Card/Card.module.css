@@ -13,6 +13,8 @@
   line-height: 19px;
   margin-top: 15px;
   margin-bottom: 10px;
+  width: 80%;
+  text-align: center;
 }
 
 .card_cost {

@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger'
 import productsReducer from './slices/mainSlice'
-const rootReducer = combineReducers({productsReducer});
+import productReducer from './slices/fetchProductSlice'
+const rootReducer = combineReducers({productsReducer, productReducer});
 
 export const setupStore = () => {
   return configureStore({

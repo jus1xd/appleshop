@@ -1,78 +1,47 @@
-import React from "react";
+import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { fetchProduct } from "../../store/actions/fetchOneProduct";
+import { fetchAllProducts } from "../../store/actions/fetchProducts";
 
 import s from "./ProductInfo.module.css";
 
-interface IProductInfo {
-  productId: string;
-}
+function ProductInfo() {
+  const { query } = useRouter();
 
-function ProductInfo({ productId }: IProductInfo) {
-  let baseImg = "../img/product/";
+  const id: any = query.id
 
-  let img: string = '';
-  let name: string = '';
+  let img: string = "";
+  let name: string = "";
   let cost: number = 0;
-  let description: string = '';
+  let description: string = "";
 
-  switch (productId) {
-    case "i1364blue":
-      img = "1";
-      name = "Apple iPhone 13, 64 ГБ, «синий»";
-      cost = 79999;
-      break;
-    case "i13128white":
-      img = "2";
-      name = "Apple iPhone 13, 128 ГБ, «белый»";
-      cost = 79999;
-      break;
-    case "i13256black":
-      img = "3";
-      name = "Apple iPhone 13, 256 ГБ, «черный»";
-      cost = 79999;
-      break;
-    case "i13512red":
-      img = "4";
-      name = "Apple iPhone 13, 512 ГБ, «красный»";
-      cost = 79999;
-      break;
-    case "i13P64gray":
-      img = "5";
-      name = "Apple iPhone 13 Pro, 64 ГБ, «серый»";
-      cost = 79999;
-      break;
-    case "i13P128white":
-      img = "6";
-      name = "Apple iPhone 13 Pro, 128 ГБ, «белый»";
-      cost = 79999;
-      break;
-    case "i13P256blue":
-      img = "7";
-      name = "Apple iPhone 13 Pro, 256 ГБ, «синий»";
-      cost = 79999;
-      break;
-    case "i13P512gold":
-      img = "8";
-      name = "Apple iPhone 13 Pro, 512 ГБ, «золотой»";
-      cost = 79999;
-      break;
-    default:
-      break;
-  }
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchAllProducts())
+  }, []);
 
-  description =
-    "Наша самая совершенная система двух камер. Улавливает до 47% больше света для более качественных фотографий и видео.";
+  useEffect(() => {
+    dispatch(fetchProduct(id))
+  }, [id]);
+
+  const data = useAppSelector((state) => state.productsReducer.products);
+  const product = useAppSelector((state) => state.productReducer)
+
+  console.log('232323', product)
 
   return (
     <div className={s.product_inner}>
       <div className={s.photo_section}>
-        <img src={`${baseImg}${img}.png`} alt="" />
+        <img src={`http://localhost:5000/${product.picture}`} alt="" />
       </div>
       <div className={s.info_section}>
-        <div className={s.section_title}>{name}</div>
-        <div className={s.product_cost}>{cost} ₽</div>
+        <div className={s.section_title}>{product.title}</div>
+        <div className={s.product_cost}>{product.price} ₽</div>
         <div className={s.main_btn}>Добавить в корзину</div>
         <div className={s.prod_title}>Описание</div>
-        <div className={s.prod_subtitle}>{description}</div>
+        <div className={s.prod_subtitle}>{product.subTitle}</div>
         <div className={s.prod_title}>Характеристики</div>
         <div className={s.spec_title}>Общие характеристики</div>
         <div className={s.spec_wrapper}>

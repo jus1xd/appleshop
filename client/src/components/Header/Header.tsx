@@ -14,7 +14,7 @@ function Header() {
       <header className={s.header}>
         <div className={s.container}>
           <div className={s.header_inner}>
-            <Link href="./">
+            <Link href="/">
               <a className={s.logo}>
                 <img src="../img/header/logo.png" alt="" />
               </a>

@@ -20,7 +20,6 @@ const Basket = () => {
             <BasketCard />
             <BasketCard />
             <BasketCard />
-
           </div>
           
           <div className={s.payment}>
