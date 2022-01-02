@@ -1,4 +1,3 @@
-import Product, {IProduct} from "../models/Product";
 import ProductService from "../service/productService";
 
 class ProductsController {

@@ -1,4 +1,4 @@
-import Product, {IProduct} from "../models/Product";
+import Product, {IProduct} from "../models/productModel";
 import FileService from "./fileService";
 import fileService from "./fileService";
 
