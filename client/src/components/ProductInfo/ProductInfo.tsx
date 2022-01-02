@@ -10,26 +10,17 @@ import s from "./ProductInfo.module.css";
 function ProductInfo() {
   const { query } = useRouter();
 
-  const id: any = query.id
-
-  let img: string = "";
-  let name: string = "";
-  let cost: number = 0;
-  let description: string = "";
-
-  const dispatch = useAppDispatch();
+  const id: any = query.id;
+  
   useEffect(() => {
-    dispatch(fetchAllProducts())
+    dispatch(fetchProduct(id));
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchProduct(id))
-  }, [id]);
+  const dispatch = useAppDispatch();
 
-  const data = useAppSelector((state) => state.productsReducer.products);
-  const product = useAppSelector((state) => state.productReducer)
+  const product = useAppSelector((state) => state.productReducer);
 
-  console.log('232323', product)
+  console.log("232323", id);
 
   return (
     <div className={s.product_inner}>

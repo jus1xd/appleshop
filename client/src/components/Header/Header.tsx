@@ -14,7 +14,7 @@ function Header() {
       <header className={s.header}>
         <div className={s.container}>
           <div className={s.header_inner}>
-            <Link href="/">
+            <Link href="http://localhost:3000/">
               <a className={s.logo}>
                 <img src="../img/header/logo.png" alt="" />
               </a>
@@ -27,7 +27,7 @@ function Header() {
                 <img src="../img/header/user.svg" alt="" />
                 <div>Войти</div>
               </div>
-              <Link href="./basket">
+              <Link href="/basket">
                 <a href="./basket" className={s.nav_item}>
                   <img src="../img/header/basket.svg" alt="" />
                   <div>Корзина</div>

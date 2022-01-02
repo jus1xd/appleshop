@@ -8,13 +8,22 @@ import { fetchAllProducts } from "../store/actions/fetchProducts";
 
 const Index = () => {
   const dispatch = useAppDispatch();
+
+  const data = useAppSelector((state) => state.productsReducer.products);
+
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, []);
 
-  const data = useAppSelector((state) => state.productsReducer.products);
-
-  const cards = data.map(card => <Card img={card.picture} name={card.title} cost={card.price} id={card._id}/>)
+  const cards = data.map((card) => (
+    <Card
+      img={card.picture}
+      name={card.title}
+      cost={card.price}
+      id={card._id}
+      key={card._id}
+    />
+  ));
 
   return (
     <>
@@ -29,9 +38,7 @@ const Index = () => {
       <section className={s.heatsells}>
         <div className={s.container}>
           <div className={s.section_title}>Хиты продаж</div>
-          <div className={s.heat_inner}>
-            {cards}
-          </div>
+          <div className={s.heat_inner}>{cards}</div>
           <div className={s.airpods}>
             <video
               width="1170px"
@@ -44,9 +51,7 @@ const Index = () => {
               Попробуйте <span>AirPods</span>
             </div>
           </div>
-          <div className={s.heat_inner}>
-            
-          </div>
+          <div className={s.heat_inner}></div>
         </div>
       </section>
     </>
