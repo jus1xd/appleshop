@@ -1,0 +1,140 @@
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* basket  */
+
+.basket {
+  margin: 80px 0;
+}
+
+.basket_inner {
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.basket_cards {
+  width: 69%;
+}
+
+.payment {
+  height: max-content;
+  padding: 30px;
+  width: 305px;
+  background: linear-gradient(167.06deg, #253e63 3.06%, #39485e 101.22%);
+  border-radius: 15px;
+}
+
+.payment_title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.main_input {
+  width: calc(100% - 0px);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.inputs {
+  margin-bottom: 20px;
+}
+
+.main_input::placeholder {
+  color: rgba(255, 255, 255, 0.705);
+}
+
+.payment_subtitle {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 19px;
+  color: white;
+}
+
+.payment_items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.p_item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  padding: 8px 9px;
+  height: 50px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.p_item:hover {
+  opacity: 0.9;
+}
+
+.payment_total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.total {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: white;
+}
+
+.section_title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  margin-bottom: 20px;
+
+  color: #000000;
+}
+
+.main_btn {
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  padding: 13px 50px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #2c4974;
+  transition: 0.2s;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+}
+
+.main_btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.sec_btn {
+  background-color: #fff;
+  color: #1c2f4d;
+}
+
+.sec_btn:hover {
+  background-color: rgba(255, 255, 255, 0.704);
+  color: #1c2f4d;
+}

@@ -1,0 +1,178 @@
+/* product  */
+
+.product {
+  margin-top: 70px;
+  margin-bottom: 100px;
+}
+
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section_title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 33px;
+
+  margin-bottom: 30px;
+}
+
+.product_inner {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+
+.photo_section {
+  width: 580px;
+  height: 708px;
+  overflow: hidden;
+  transform: perspective(17px);
+  margin-right: 30px;
+}
+
+.photo_section img {
+  width: 580px;
+  height: 708px;
+  transition: 0.2s;
+}
+
+.photo_section:hover.photo_section img {
+  transform: scale(170%);
+}
+
+.info_section {
+  max-width: 540px;
+}
+
+.product_cost {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 33px;
+
+  margin-bottom: 30px;
+}
+
+.main_btn {
+  margin-bottom: 90px;
+}
+
+.prod_title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  margin-top: 30px;
+}
+
+.prod_subtitle {
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 15px;
+}
+
+.spec_title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.spec_wrapper {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.spec_condit {
+  width: 230px;
+}
+
+.banner {
+  margin-bottom: 80px;
+}
+
+.banner_inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 450px;
+  border-radius: 20px;
+}
+
+.banner_inner img {
+  width: 100%;
+}
+
+.banner_text {
+  position: absolute;
+  font-size: 55px;
+  font-weight: 600;
+  color: #1f1f1d;
+}
+
+/* same  */
+
+.sameprod {
+  margin-bottom: 90px;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 26px -6px rgba(0, 0, 0, 0.15);
+}
+
+.same_inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card img {
+  width: 170px;
+}
+
+.samephoto_container {
+  width: 160px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.card_title {
+  font-size: 15px;
+  line-height: 18px;
+  margin-top: -30px;
+}
+
+.card_cost {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 10px;
+}
+
+.main_btn {
+  text-align: center;
+  cursor: pointer;
+  width: max-content;
+  padding: 13px 50px;
+  background: #253e63;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  transition: 0.2s;
+  color: #ffffff;
+}
+
+.main_btn:hover {
+  background: #1c2f4d;
+}
