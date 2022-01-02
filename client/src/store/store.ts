@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
-const rootReducer = combineReducers({});
+import logger from 'redux-logger'
+import productsReducer from './slices/mainSlice'
+const rootReducer = combineReducers({productsReducer});
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   });
 };
 

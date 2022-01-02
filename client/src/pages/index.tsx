@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Card from "../components/Card/Card";
 import Header from "../components/Header/Header";
 
 import s from "../styles/Index.module.css";
+import {useAppDispatch, useAppSelector} from "../hooks/redux";
+import {fetchProducts} from "../store/actions/fetchProducts";
 
 const Index = () => {
+  const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [])
+    const data = useAppSelector(state => state.productsReducer.products)
   return (
     <>
       <Header />
@@ -90,5 +97,4 @@ const Index = () => {
     </>
   );
 };
-
 export default Index;
