@@ -6,7 +6,7 @@ import { useAppSelector } from "../hooks/redux";
 import s from "../styles/Basket.module.css";
 
 const Basket = () => {
-  const data = useAppSelector((state) => state.productsReducer.cart);
+  const data = useAppSelector((state) => state.productsReducer.cart); 
 
   const basketItems = data.map((product) => (
     <BasketCard
@@ -25,14 +25,14 @@ const Basket = () => {
         <div className={s.container}>
           <div className={s.section_title}>Корзина</div>
           <div className={s.basket_inner}>
-            <div className={s.basket_cards}>{basketItems}</div>
+            <div className={s.basket_cards}>{basketItems.length > 0 ? basketItems : 'Корзина пуста'}</div>
 
             <div className={s.payment}>
               <div className={s.payment_title}>Оформить заказ</div>
               <div className={s.inputs}>
                 <input
                   type="text"
-                  className={s.main_input}
+                  className={s.main_input} 
                   placeholder="Имя.."
                 />
                 <input
