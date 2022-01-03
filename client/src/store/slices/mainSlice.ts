@@ -13,13 +13,14 @@ export const mainSlice = createSlice({
   name: "mainSlice",
   initialState,
   reducers: {
-    addToCard(state, action: PayloadAction<Product>) {
+    addToCart(state, action: PayloadAction<Product>) {
       const exitingProduct = state.cart.find(
         (product) => product._id === action.payload._id
       );
       if (exitingProduct) {
         state.cart.map((product) =>
           product._id === action.payload._id ? (product.quantity += 1) : product
+
         );
       } else {
         state.cart.push(action.payload);
@@ -47,4 +48,7 @@ export const mainSlice = createSlice({
     },
   },
 });
+
+const {actions, reducer} = mainSlice
+export const {addToCart} = actions
 export default mainSlice.reducer;

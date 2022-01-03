@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchProduct } from "../../store/actions/fetchOneProduct";
 import { fetchAllProducts } from "../../store/actions/fetchProducts";
+import { addToCart } from "../../store/slices/mainSlice";
 
 import s from "./ProductInfo.module.css";
 
@@ -11,7 +12,7 @@ function ProductInfo() {
   const { query } = useRouter();
 
   const id: any = query.id;
-  
+
   useEffect(() => {
     dispatch(fetchProduct(id));
   }, []);
@@ -20,7 +21,15 @@ function ProductInfo() {
 
   const product = useAppSelector((state) => state.productReducer);
 
-  console.log("232323", id);
+  const data = useAppSelector((state) => state.productsReducer.products);
+
+  const addToCartHandler = (id: string) => {
+    const cartItem = data.find((product) => product._id === id);
+
+    if (cartItem) {
+      dispatch(addToCart(cartItem));
+    }
+  };
 
   return (
     <div className={s.product_inner}>
@@ -30,7 +39,9 @@ function ProductInfo() {
       <div className={s.info_section}>
         <div className={s.section_title}>{product.title}</div>
         <div className={s.product_cost}>{product.price} ₽</div>
-        <div className={s.main_btn}>Добавить в корзину</div>
+        <div className={s.main_btn} onClick={() => addToCartHandler(id)}>
+          Добавить в корзину
+        </div>
         <div className={s.prod_title}>Описание</div>
         <div className={s.prod_subtitle}>{product.subTitle}</div>
         <div className={s.prod_title}>Характеристики</div>

@@ -1,5 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { addToCart } from "../../store/slices/mainSlice";
+import { Product } from "../../types";
 
 import s from "./Card.module.css";
 
@@ -11,10 +14,16 @@ interface ICard {
 }
 
 function Card({ img, name, cost, id }: ICard) {
-  // let baseImg = "../img/heatsells/";
-  // name = "Apple MacBook Pro 2020";
-  // cost = 259991;
-  // link = "./product";
+  const dispatch = useAppDispatch();
+  const data = useAppSelector((state) => state.productsReducer.products);
+
+  const addToCartHandler = (id: string) => {
+    const cartItem = data.find((product) => product._id === id);
+
+    if (cartItem) {
+      dispatch(addToCart(cartItem));
+    }
+  };
 
   return (
     <div className={s.card}>
@@ -25,7 +34,9 @@ function Card({ img, name, cost, id }: ICard) {
         <a className={s.card_title}>{name}</a>
       </Link>
       <div className={s.card_cost}>{cost} ₽</div>
-      <div className={s.main_btn}>В корзину</div>
+      <div className={s.main_btn} onClick={() => addToCartHandler(id)}>
+        В корзину
+      </div>
     </div>
   );
 }
