@@ -1,4 +1,4 @@
-import Product, {IProduct} from "../models/productModel";
+import {IProduct} from "../models/productModel";
 import fileService from "./fileService";
 import Cart from '../models/cartItemsModel'
 class CartService {
@@ -8,7 +8,7 @@ class CartService {
     }
 
     async getAll () {
-        return await Cart.find ().exec().toObject();
+        return Cart.find();
     }
 
     async getOne ( id: string ) {

@@ -17,7 +17,7 @@ app.use ( express.json () )
 app.use ( express.static ( 'static' ) )
 app.use ( fileUpload () )
 app.use ( '/api', productRouter )
-app.use ( '/api', cartRouter )
+app.use ( '/cart', cartRouter )
 
 const startApp = async () => {
     try {
