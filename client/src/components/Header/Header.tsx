@@ -9,7 +9,12 @@ function Header() {
     <>
       <Head>
         <title>Applify - Онлайн-магазин техники Apple</title>
-        <link type="image/svg" sizes="120x120" rel="icon" href="../img/fav.svg"/>
+        <link
+          type="image/svg"
+          sizes="120x120"
+          rel="icon"
+          href="../img/fav.svg"
+        />
       </Head>
       <header className={s.header}>
         <div className={s.container}>
@@ -19,14 +24,32 @@ function Header() {
                 <img src="../img/header/logo.png" alt="" />
               </a>
             </Link>
+            <div className={s.category_btn}>
+              Категории
+              <img src="../img/header/category.svg" alt="" />
+            </div>
             <div className={s.search}>
               <input type="text" placeholder="Искать.." />
             </div>
             <nav className={s.nav}>
-              <div className={`${s.nav_item} ${s.auth_btn}`}>
-                <img src="../img/header/user.svg" alt="" />
-                <div>Войти</div>
-              </div>
+            <Link href="/login">
+                <a className={`${s.nav_item} ${s.auth_btn}`}>
+                  <img src="../img/header/comparison.svg" alt="" />
+                  <div>Сравнение</div>
+                </a>
+              </Link>
+              <Link href="/basket">
+                <a href="./basket" className={s.nav_item}>
+                  <img src="../img/header/favorite.svg" alt="" />
+                  <div>Избранное</div>
+                </a>
+              </Link>
+              <Link href="/login">
+                <a className={`${s.nav_item} ${s.auth_btn}`}>
+                  <img src="../img/header/user.svg" alt="" />
+                  <div>Войти</div>
+                </a>
+              </Link>
               <Link href="/basket">
                 <a href="./basket" className={s.nav_item}>
                   <img src="../img/header/basket.svg" alt="" />

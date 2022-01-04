@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MainReducer, Product } from "../../types";
+import { fetchCartProducts } from "../actions/fetchCartProducts";
 import { fetchAllProducts } from "../actions/fetchProducts";
 
 const initialState: MainReducer = {
@@ -20,7 +21,6 @@ export const mainSlice = createSlice({
       if (exitingProduct) {
         state.cart.map((product) =>
           product._id === action.payload._id ? (product.quantity += 1) : product
-
         );
       } else {
         state.cart.push(action.payload);
@@ -46,9 +46,27 @@ export const mainSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    [fetchCartProducts.fulfilled.type]: (
+      state,
+      action: PayloadAction<Product[]>
+    ) => { 
+      state.isLoading = false;
+      state.error = "";
+      state.cart = action.payload;
+    },
+    [fetchCartProducts.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchCartProducts.rejected.type]: (
+      state,
+      action: PayloadAction<string>
+    ) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-const {actions, reducer} = mainSlice
-export const {addToCart} = actions
+const { actions, reducer } = mainSlice;
+export const { addToCart } = actions;
 export default mainSlice.reducer;
