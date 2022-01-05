@@ -19,10 +19,7 @@ class UserService {
         const userDto = new UserDto ( user )
         const tokens = tokenService.generateTokens ( {...userDto} )
         await tokenService.saveToken ( userDto.id, tokens.refreshToken )
-        return {
-            ...tokens,
-            user: userDto
-        }
+        return {...tokens,}
     }
 
     async login ( email, password ) {
@@ -37,7 +34,7 @@ class UserService {
         const userDto = new UserDto ( user );
         const tokens = tokenService.generateTokens ( {...userDto} );
         await tokenService.saveToken ( userDto.id, tokens.refreshToken );
-        return {...tokens, user: userDto}
+        return {...tokens}
     }
 
     async logout ( refreshToken ) {
@@ -67,7 +64,7 @@ class UserService {
         const tokens = tokenService.generateTokens({...userDto});
 
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
-        return {...tokens, user: userDto}
+        return {...tokens}
     }
 }
 
