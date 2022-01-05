@@ -8,8 +8,8 @@ export interface MainReducer {
 export interface AuthReducer {
   user: {};
   isAuth: boolean;
-  // isLoading: boolean;
-  // error: string;
+  isLoading: boolean;
+  error: string;
 }
 
 export interface Product {

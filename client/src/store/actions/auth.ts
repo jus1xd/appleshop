@@ -4,6 +4,8 @@ import { useAppDispatch } from "../../hooks/redux";
 import AuthService from "../../services/AuthService";
 import { AuthReducer } from "../../types";
 
+const baseURL = 'http://localhost:5000/api/'
+
 interface IData {
   email: string;
   password: string;
@@ -12,9 +14,7 @@ interface IData {
 export const login = createAsyncThunk(
   "login",
   async ({ email, password }: IData, thunkAPI) => {
-    const res = await AuthService.login(email, password);
-    localStorage.setItem("token", res.data.accessToken);
-    const dispatch = useAppDispatch();
+    const res = await axios.post('http://localhost:5000/api/login', {email, password});
     return res.data;
   }
 );
@@ -22,13 +22,11 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   "register",
   async ({ email, password }: IData, thunkAPI) => {
-    const res = await AuthService.register(email, password);
-    localStorage.setItem("token", res.data.accessToken);
+    const res = await axios.post('http://localhost:5000/api/register', {email, password});
     return res.data;
   }
 );
 export const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
-  const res = await AuthService.logout();
-  localStorage.removeItem("token");
+  const res = await axios.post('http://localhost:5000/api/logout');
   return;
 });
