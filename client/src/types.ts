@@ -4,6 +4,14 @@ export interface MainReducer {
   isLoading: boolean;
   error: string;
 }
+
+export interface AuthReducer {
+  user: {};
+  isAuth: boolean;
+  // isLoading: boolean;
+  // error: string;
+}
+
 export interface Product {
   title: string;
   subTitle: string;

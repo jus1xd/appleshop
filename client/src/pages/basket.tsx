@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { on } from "stream";
+
 import BasketCard from "../components/BasketCard/BasketCard";
+import DateItem from "../components/DateItem/DateItem";
+import TimeItem from "../components/TimeItem/TimeItem";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
 import { useAppSelector } from "../hooks/redux";
@@ -22,6 +24,8 @@ const Basket = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [onlinePayment, setOnlinePayment] = useState<boolean>(true);
   const [payMethod, setPayMethod] = useState<string>("");
+  const [dateActive, setDateActive] = useState<string>("");
+  const [timeActive, setTimeActive] = useState<string>("");
 
   return (
     <>
@@ -37,42 +41,21 @@ const Basket = () => {
 
             <div className={s.payment}>
               <div className={s.payment_title}>Оформить заказ</div>
-              <div className={s.inputs}>
-                <input
-                  type="text"
-                  className={s.main_input}
-                  placeholder="Имя.."
-                />
-                <input
-                  type="text"
-                  className={s.main_input}
-                  placeholder="Телефон.."
-                />
-                <input
-                  type="text"
-                  className={s.main_input}
-                  placeholder="Адрес.."
-                />
+              <div className={s.payment_subtitle_text}>
+                Вы можете оплатить заказ на сайте или при получении товара у
+                курьера.
               </div>
-              <div className={s.payment_subtitle}>Способ оплаты</div>
-              <div className={s.payment_items}>
-                <div className={s.p_item}>
-                  <img src="../img/basket/payment/1.svg" alt="" />
+              <div className={s.payment_values}>
+                <div className={s.payment_total}>
+                  <div className={s.payment_subtitle}>Кол-во:</div>
+                  <div className={s.total}>3</div>
                 </div>
-                <div className={s.p_item}>
-                  <img src="../img/basket/payment/2.svg" alt="" />
-                </div>
-                <div className={s.p_item}>
-                  <img src="../img/basket/payment/3.svg" alt="" />
-                </div>
-                <div className={s.p_item}>
-                  <img src="../img/basket/payment/4.svg" alt="" />
+                <div className={s.payment_total}>
+                  <div className={s.payment_subtitle}>Итого:</div>
+                  <div className={s.total}>89 991 ₽</div>
                 </div>
               </div>
-              <div className={s.payment_total}>
-                <div className={s.payment_subtitle}>Итого:</div>
-                <div className={s.total}>89 991 ₽</div>
-              </div>
+
               <div className={s.main_btn} onClick={() => setModalActive(true)}>
                 Перейти к оплате
               </div>
@@ -100,27 +83,99 @@ const Basket = () => {
           </div>
           <div className={s.modal_subtitle}>Выбери дату:</div>
           <div className={s.date_items}>
-            <div className={s.date_item}>5 янв.</div>
-            <div className={s.date_item}>6 янв.</div>
-            <div className={s.date_item}>7 янв.</div>
-            <div className={s.date_item}>8 янв.</div>
-            <div className={s.date_item}>9 янв.</div>
-            <div className={s.date_item}>10 янв.</div>
-            <div className={s.date_item}>11 янв.</div>
-            <div className={s.date_item}>12 янв.</div>
-            <div className={s.date_item}>13 янв.</div>
+            <DateItem
+              date="5 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="6 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="7 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="8 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="9 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="10 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="11 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="12 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
+            <DateItem
+              date="13 янв"
+              dateActive={dateActive}
+              setDate={setDateActive}
+            />
           </div>
           <div className={s.modal_subtitle}>Выбери время:</div>
           <div className={s.date_items}>
-            <div className={s.date_item}>10:00</div>
-            <div className={s.date_item}>11:00</div>
-            <div className={s.date_item}>12:00</div>
-            <div className={s.date_item}>13:00</div>
-            <div className={s.date_item}>14:00</div>
-            <div className={s.date_item}>15:00</div>
-            <div className={s.date_item}>16:00</div>
-            <div className={s.date_item}>17:00</div>
-            <div className={s.date_item}>18:00</div>
+            <TimeItem
+              time="10:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="11:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="12:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="13:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="14:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="15:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="16:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="17:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
+            <TimeItem
+              time="18:00"
+              timeActive={timeActive}
+              setTime={setTimeActive}
+            />
           </div>
           <div className={s.modal_subtitle}>Выбери способ оплаты:</div>
           <div className={s.payment_way}>

@@ -1,10 +1,15 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header/Header";
 
 import s from "../styles/Auth.module.css";
 
 function login() {
+
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+
   return (
     <>
       <Header />
@@ -18,11 +23,15 @@ function login() {
                 className={s.reg}
                 type="text"
                 placeholder="Введите email..."
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
               <input
                 className={s.reg}
-                type="text"
+                type="password"
                 placeholder="Введите пароль..."
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
               />
               <div className={s.button}>
                 <a href="#">Войти</a>
