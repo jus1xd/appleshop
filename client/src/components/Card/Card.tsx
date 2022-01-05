@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { addToCart } from "../../store/slices/mainSlice";
-import { Product } from "../../types";
+import axios from "axios";
 
 import s from "./Card.module.css";
 
@@ -17,11 +17,33 @@ function Card({ img, name, cost, id }: ICard) {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.productsReducer.products);
 
+  let url = "http://localhost:5000/cart/products/";
+
   const addToCartHandler = (id: string) => {
     const cartItem = data.find((product) => product._id === id);
 
     if (cartItem) {
       dispatch(addToCart(cartItem));
+
+      // let formdata = new FormData();
+
+      // let price = cartItem.price.toString()
+
+      // formdata.append("title", cartItem.title);
+      // formdata.append("price", price);
+      // formdata.append("picture", cartItem.picture);
+
+      // console.log(formdata);
+
+      // // let data = {
+      // //     title: cartItem.title,
+      // //     price: cartItem.price,
+      // //     picture: formdata,
+      // // };
+
+      // axios.post(url, (formdata), {
+      //   headers: {'Content-Type': 'multipart/form-data'}
+      // }).catch((e) => console.log(e.response));
     }
   };
 

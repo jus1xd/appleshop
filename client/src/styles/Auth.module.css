@@ -1,0 +1,87 @@
+.container {
+  width: 100%;
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.title_log {
+  font-weight: 600;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.log_inner {
+  margin-top: 100px;
+}
+
+.section_title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  opacity: 0.8;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 70px;
+}
+.reg {
+  font-size: 15px;
+  width: 330px;
+  height: 44px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px 0 15px 15px;
+  align-items: center;
+  outline: none;
+}
+.button {
+  padding: 13px 76px;
+  background: #253e63;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-bottom: 48px;
+  width: 330px;
+  text-align: center;
+}
+.button a {
+  font-size: 15px;
+  color: #fff;
+  text-decoration: none;
+}
+.benefis_title {
+  width: 200px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin-bottom: 18px;
+}
+
+.check_box {
+  margin-bottom: 22px;
+}
+
+.check_box label {
+    margin-left: 5px;
+}
+
+.idk_pass a {
+  text-decoration: none;
+  color: rgba(35, 132, 193, 1);
+  margin-bottom: 11px;
+}
+
+.create_new_acc {
+  margin-top: 8px;
+}
+
+.create_new_acc a {
+  color: rgba(35, 132, 193, 1);
+  text-decoration: none;
+}
