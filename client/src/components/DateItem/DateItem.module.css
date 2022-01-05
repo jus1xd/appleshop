@@ -1,0 +1,23 @@
+.date_item {
+  cursor: pointer;
+  padding: 14px 12px;
+  width: max-content;
+  font-size: 15px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.date_item:hover {
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: #253e63;
+  color: white;
+}
+
+.date_item.active {
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: #253e63;
+  color: white;
+}
