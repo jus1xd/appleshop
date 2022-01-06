@@ -1,11 +1,30 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
+import { useAppDispatch } from "../hooks/redux";
+import { login } from "../store/actions/auth";
 import s from "../styles/Auth.module.css";
-function login() {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
 
+type TUser = {
+  email: string;
+  password: string;
+};
+
+function loginPage() {
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userPassword, setUserPassword] = useState<string>("");
+
+  const dispatch = useAppDispatch();
+
+  const user: TUser = {
+    email: userEmail,
+    password: userPassword,
+  };
+
+  const loginHandler = async (user: TUser) => {
+    dispatch(login(user));
+    console.log(user);
+  };
 
   return (
     <>
@@ -20,17 +39,17 @@ function login() {
                 className={s.reg}
                 type="text"
                 placeholder="Введите email..."
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                onChange={(e) => setUserEmail(e.target.value)}
+                value={userEmail}
               />
               <input
                 className={s.reg}
                 type="password"
                 placeholder="Введите пароль..."
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
+                onChange={(e) => setUserPassword(e.target.value)}
+                value={userPassword}
               />
-              <div className={s.button}>
+              <div className={s.button} onClick={() => loginHandler(user)}>
                 <a href="#">Войти</a>
               </div>
               <div className={s.check_box}>
@@ -57,4 +76,4 @@ function login() {
   );
 }
 
-export default login;
+export default loginPage;
