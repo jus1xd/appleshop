@@ -1,13 +1,12 @@
 import UserModel from "../models/userModel";
-import bcrypt from "bcrypt";
-import * as uuid from "uuid";
+import bcrypt from 'bcrypt'
+import * as uuid from 'uuid'
 import tokenService from "./tokenService";
-import { UserDto } from "../dtos/userDto";
-import { sendActivationMail } from "./mailService";
-import { ApiError } from "../exceptions/api-error";
+import {UserDto} from "../dtos/userDto";
+import {sendActivationMail} from "./mailService";
+import {ApiError} from "../exceptions/api-error";
 
 class UserService {
-<<<<<<< HEAD
     async registration ( username, email, password, role, cart ) {
         const candidate = await UserModel.findOne ( {email} )
         if (candidate) {
@@ -21,37 +20,8 @@ class UserService {
         const tokens = tokenService.generateTokens ( {...userDto} )
         await tokenService.saveToken ( userDto.id, tokens.refreshToken )
         return {...tokens,}
-=======
-  async registration(username, email, password, role, cart) {
-    const candidate = await UserModel.findOne({ email });
-    if (candidate) {
-      throw ApiError.BadRequest("Пользователь с таким email уже существует");
->>>>>>> 18b8dfc48939010e82de024726887ab972c3c037
     }
-    const hashPassword = await bcrypt.hash(password, 3);
-    const activationLink = uuid.v4();
-    const user = await UserModel.create({
-      username,
-      email,
-      password: hashPassword,
-      activationLink,
-      cart,
-      role,
-    });
-    await sendActivationMail(
-      email,
-      `${process.env.API_URL}/api/activate/${activationLink}`
-    );
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return {
-      ...tokens,
-      user: userDto,
-    };
-  }
 
-<<<<<<< HEAD
     async login ( email, password ) {
         const user = await UserModel.findOne ( {email} )
         if (!user) {
@@ -65,57 +35,42 @@ class UserService {
         const tokens = tokenService.generateTokens ( {...userDto} );
         await tokenService.saveToken ( userDto.id, tokens.refreshToken );
         return {...tokens}
-=======
-  async login(email, password) {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      throw ApiError.BadRequest(`Пользователь с таким ${email} не найден`);
->>>>>>> 18b8dfc48939010e82de024726887ab972c3c037
     }
-    const isPassEquals = await bcrypt.compare(password, user.password);
-    if (!isPassEquals) {
-      throw ApiError.BadRequest("Неверный пароль");
+
+    async logout ( refreshToken ) {
+        return await tokenService.removeToken ( refreshToken );
     }
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
-  }
 
-  async logout(refreshToken) {
-    return await tokenService.removeToken(refreshToken);
-  }
-
-  async activate(activationLink) {
-    const user = await UserModel.findOne({ activationLink });
-    if (!user) {
-      throw ApiError.BadRequest("Некорректная ссылка для активации");
+    async activate ( activationLink ) {
+        const user = await UserModel.findOne ( {activationLink} )
+        if (!user) {
+            throw ApiError.BadRequest ( 'Некорректная ссылка для активации' )
+        }
+        user.isActivated = true
+        await user.save ()
     }
-    user.isActivated = true;
-    await user.save();
-  }
 
-<<<<<<< HEAD
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    async refresh ( refreshToken ) {
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError ();
+        }
+        const userData = tokenService.validateRefreshToken ( refreshToken );
+        const tokenFromDb = await tokenService.findToken ( refreshToken );
+        if (!userData || !tokenFromDb) {
+            throw ApiError.UnauthorizedError ();
+        }
+        const user = await UserModel.findById ( userData.id );
+        const userDto = new UserDto ( user );
+        const tokens = tokenService.generateTokens ( {...userDto} );
+        await tokenService.saveToken ( userDto.id, tokens.refreshToken );
         return {...tokens}
-=======
-  async refresh(refreshToken) {
-    if (!refreshToken) {
-      throw ApiError.UnauthorizedError();
->>>>>>> 18b8dfc48939010e82de024726887ab972c3c037
     }
-    const userData = tokenService.validateRefreshToken(refreshToken);
-    const tokenFromDb = await tokenService.findToken(refreshToken);
-    if (!userData || !tokenFromDb) {
-      throw ApiError.UnauthorizedError();
-    }
-    const user = await UserModel.findById(userData.id);
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
 
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
-  }
+    async addToCart ( idObject ) {
+        const updatedUser = await UserModel.findById ( idObject.userId )
+        updatedUser.cart.push ( idObject.productId )
+        return UserModel.findByIdAndUpdate ( idObject.userId, updatedUser, {new: true} );
+    }
 }
 
-export default new UserService();
+export default new UserService ()

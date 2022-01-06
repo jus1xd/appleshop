@@ -1,66 +1,43 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { addToCart } from "../../store/slices/mainSlice";
+import React, {useEffect, useState} from "react";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import axios from "axios";
-
 import s from "./Card.module.css";
+import {Product} from "../../types";
+import {addToCart} from "../../store/actions/fetchProducts";
+import {log} from "util";
 
 interface ICard {
-  img: string;
-  name: string;
-  cost: number;
-  id: string;
+    card: Product
+    key: string
 }
 
-function Card({ img, name, cost, id }: ICard) {
-  const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.productsReducer.products);
-
-  let url = "http://localhost:5000/cart/products/";
-
-  const addToCartHandler = (id: string) => {
-    const cartItem = data.find((product) => product._id === id);
-
-    if (cartItem) {
-      dispatch(addToCart(cartItem));
-
-      // let formdata = new FormData();
-
-      // let price = cartItem.price.toString()
-
-      // formdata.append("title", cartItem.title);
-      // formdata.append("price", price);
-      // formdata.append("picture", cartItem.picture);
-
-      // console.log(formdata);
-
-      // // let data = {
-      // //     title: cartItem.title,
-      // //     price: cartItem.price,
-      // //     picture: formdata,
-      // // };
-
-      // axios.post(url, (formdata), {
-      //   headers: {'Content-Type': 'multipart/form-data'}
-      // }).catch((e) => console.log(e.response));
+function Card ( {card}: ICard ) {
+    const [productId, setProductId] = useState<String> ( '' )
+    const idForAddToCart = {
+        userId: "61d6f7640be09ca8afef5a95",
+        productId: productId
     }
-  };
-
-  return (
-    <div className={s.card}>
-      <div className={s.card_photo_container}>
-        <img src={`http://localhost:5000/${img}`} alt="" />
-      </div>
-      <Link href={`./products/${id}`}>
-        <a className={s.card_title}>{name}</a>
-      </Link>
-      <div className={s.card_cost}>{cost} ₽</div>
-      <div className={s.main_btn} onClick={() => addToCartHandler(id)}>
-        В корзину
-      </div>
-    </div>
-  );
+    const dispatch = useAppDispatch ();
+    useEffect ( () => {
+        if (productId) {
+            dispatch ( addToCart ( idForAddToCart ) )
+        }
+    }, [productId] );
+    return (
+        <div className={s.card}>
+            <div className={s.card_photo_container}>
+                <img src={`http://localhost:5000/${card.picture}`} alt=""/>
+            </div>
+            <Link href={`./products/${card._id}`}>
+                <a className={s.card_title}>{card.title}</a>
+            </Link>
+            <div className={s.card_cost}>{card.price} ₽</div>
+            <div className={s.main_btn} onClick={() => setProductId ( card._id )}>
+                В корзину
+            </div>
+        </div>
+    );
 }
 
 export default Card;

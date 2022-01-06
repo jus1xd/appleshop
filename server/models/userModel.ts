@@ -6,7 +6,7 @@ const UserModel = new Schema ( {
     password: {type: String, required: true},
     role : {type : String, default: 'USER'},
     isActivated: {type: Boolean, required: true, default: false},
-    cart: {type: [String], required: true, default: [] },
+    cart: {type: [String], default: [] },
     activationLink: {type: String}
 } )
 

@@ -14,5 +14,6 @@ userRouter.post("/login", userController.login);
 userRouter.post("/logout", userController.logout);
 userRouter.get("/activate/:link", userController.activate);
 userRouter.post("/refresh", userController.refresh);
+userRouter.put('/addToCart', userController.addToCart)
 
 export default userRouter;

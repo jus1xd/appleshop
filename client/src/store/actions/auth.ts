@@ -22,7 +22,7 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   "register",
   async ({ email, password }: IData, thunkAPI) => {
-    const res = await axios.post('http://localhost:5000/api/register', {email, password});
+    const res = await axios.post('http://localhost:5000/api/registration', {email, password});
     return res.data;
   }
 );

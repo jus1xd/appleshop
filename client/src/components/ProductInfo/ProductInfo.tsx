@@ -1,26 +1,20 @@
 import { useRouter } from "next/router";
-import { ParsedUrlQuery } from "querystring";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchProduct } from "../../store/actions/fetchOneProduct";
-import { fetchAllProducts } from "../../store/actions/fetchProducts";
+import { fetchOneProduct } from "../../store/actions/fetchProducts";
 import { addToCart } from "../../store/slices/mainSlice";
 
 import s from "./ProductInfo.module.css";
 
 function ProductInfo() {
   const { query } = useRouter();
-
   const id: any = query.id;
 
   useEffect(() => {
-    dispatch(fetchProduct(id));
+    dispatch(fetchOneProduct(id));
   }, []);
-
   const dispatch = useAppDispatch();
-
   const product = useAppSelector((state) => state.productReducer);
-
   const data = useAppSelector((state) => state.productsReducer.products);
 
   const addToCartHandler = (id: string) => {
