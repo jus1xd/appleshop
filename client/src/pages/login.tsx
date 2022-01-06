@@ -1,11 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
-
 import s from "../styles/Auth.module.css";
-
 function login() {
-
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 

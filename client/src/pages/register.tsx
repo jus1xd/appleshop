@@ -15,6 +15,11 @@ function register() {
             <div className={s.register}>
               <div className={s.title_log}>Зарегистрируйтесь в системе</div>
               <input
+                  className={s.reg}
+                  type="text"
+                  placeholder="Введите ваше имя..."
+              />
+              <input
                 className={s.reg}
                 type="text"
                 placeholder="Введите email..."

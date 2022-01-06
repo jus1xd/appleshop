@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-
 import BasketCard from "../components/BasketCard/BasketCard";
 import DateItem from "../components/DateItem/DateItem";
 import TimeItem from "../components/TimeItem/TimeItem";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
 import { useAppSelector } from "../hooks/redux";
-
 import s from "../styles/Basket.module.css";
 
 const Basket = () => {
-  const data = useAppSelector((state) => state.productsReducer.cart);
-
+  const data = useAppSelector(state => state.productsReducer.products)
   const basketItems = data.map((product) => (
     <BasketCard
       img={product.picture}
