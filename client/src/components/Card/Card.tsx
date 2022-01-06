@@ -5,7 +5,6 @@ import axios from "axios";
 import s from "./Card.module.css";
 import {Product} from "../../types";
 import {addToCart} from "../../store/actions/fetchProducts";
-import {log} from "util";
 
 interface ICard {
     card: Product

@@ -57,9 +57,9 @@ class UserController {
 
     async activate ( req, res, next ) {
         try {
-            const activationLink = req.param.link;
+            const activationLink = req.params.link
             await usersService.activate ( activationLink );
-            return req.redirect ( process.env.CLIENT_URL );
+            return res.redirect( process.env.CLIENT_URL );
         } catch (e) {
             next ( e );
         }
@@ -82,7 +82,7 @@ class UserController {
     async addToCart ( req, res, next ) {
         try {
             const idObject = req.body
-            return res.json ( await usersService.addToCart ( idObject) )
+            return res.json ( await usersService.addToCart ( idObject ) )
         } catch (e) {
             next ( e );
         }
