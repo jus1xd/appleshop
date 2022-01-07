@@ -54,8 +54,8 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    
   },
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authMiddleware)
 });
 
 const { actions, reducer } = authSlice;

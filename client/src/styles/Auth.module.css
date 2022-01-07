@@ -41,15 +41,30 @@
   padding: 15px 0 15px 15px;
   align-items: center;
   outline: none;
+  transition: 0.4s;
 }
+
+.reg.error {
+  border: 1px solid #d25047;
+}
+
+.error::placeholder {
+  color: #d25047;
+}
+
+.error {
+  margin-bottom: 20px;
+  color: #d25047;
+}
+
 .button {
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
   padding: 13px 76px;
   background: #253e63;
   border-radius: 10px;
   text-decoration: none;
-  margin-bottom: 48px;
+  margin-bottom: 30px;
   width: 330px;
   text-align: center;
 }
@@ -75,7 +90,7 @@
 }
 
 .check_box label {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .idk_pass a {

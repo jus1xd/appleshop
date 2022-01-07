@@ -12,6 +12,11 @@ export interface AuthReducer {
   error: string;
 }
 
+export interface AuthResponse {
+  accessToken: string,
+  refreshToken: string,
+}
+
 export interface Product {
   title: string;
   subTitle: string;

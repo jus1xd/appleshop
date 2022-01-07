@@ -16,7 +16,90 @@ function registerPage() {
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
-  const [repeatUserPassword, setUserRepeatPassword] = useState<string>("");
+  const [userRepeatPassword, setUserRepeatPassword] = useState<string>("");
+
+  const [nameError, setNameError] = useState<string>(
+    "Имя не может быть пустое"
+  );
+  const [emailError, setEmailError] = useState<string>(
+    "Email не может быть пустым"
+  );
+  const [passwordError, setPasswordError] = useState<string>(
+    "Пароль некорректный"
+  );
+  const [repeatPasswordError, setRepeatPasswordError] = useState<string>(
+    "Пароли не совпадают"
+  );
+
+  const [emailDirty, setEmailDirty] = useState<boolean>(false);
+  const [nameDirty, setNameDirty] = useState<boolean>(false);
+  const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
+  const [repeatPasswordDirty, setRepeatPasswordDirty] =
+    useState<boolean>(false);
+
+  const usernameHandler = (e: any) => {
+    setUserName(e.target.value);
+    if (!e.target.value) {
+      setNameError("Имя не может быть пустое");
+    } else {
+      setNameError("");
+    }
+  };
+
+  const emailHandler = (e: any) => {
+    setUserEmail(e.target.value);
+    if (!e.target.value) {
+      setEmailError("Email не может быть пустым");
+    } else if (!e.target.value.includes("@")) {
+      setEmailError("Некорректный email");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const passwordHandler = (e: any) => {
+    setUserPassword(e.target.value);
+    if (!e.target.value) {
+      setPasswordError("Пароль не должен быть пустым");
+    } else if (e.target.value < 4 || e.target.value > 16) {
+      setPasswordError("Пароль должен быть длинной 4-16 символов");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const repeatPasswordHandler = (e: any) => {
+    setUserRepeatPassword(e.target.value);
+    if (!e.target.value) {
+      setRepeatPasswordError("Повтор пароля не должен быть пустым");
+    } else if (e.target.value < 4 || e.target.value > 32) {
+      setRepeatPasswordError("Пароль должен быть длинной 4-16 символов");
+    } else if (userPassword !== e.target.value) {
+      setRepeatPasswordError("Пароли не совпадают");
+    } else {
+      setRepeatPasswordError("");
+    }
+  };
+
+  const blurHandler = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    switch (e.target.name) {
+      case "username":
+        setNameDirty(true);
+        break;
+      case "email":
+        setEmailDirty(true);
+        break;
+      case "password":
+        setPasswordDirty(true);
+        break;
+
+      case "repeatPassword":
+        setRepeatPasswordDirty(true);
+        break;
+      default:
+        break;
+    }
+  };
 
   const dispatch = useAppDispatch();
 
@@ -41,36 +124,65 @@ function registerPage() {
             <div className={s.register}>
               <div className={s.title_log}>Зарегистрируйтесь в системе</div>
               <input
-                className={s.reg}
+                className={
+                  nameDirty && nameError ? `${s.reg} ${s.error}` : s.reg
+                }
                 type="text"
+                name="username"
                 placeholder="Введите ваше имя..."
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => usernameHandler(e)}
+                onBlur={(e) => blurHandler(e)}
                 value={userName}
               />
               <input
-                className={s.reg}
+                className={
+                  emailDirty && emailError ? `${s.reg} ${s.error}` : s.reg
+                }
                 type="text"
+                name="email"
                 placeholder="Введите email..."
-                onChange={(e) => setUserEmail(e.target.value)}
+                onChange={(e) => emailHandler(e)}
+                onBlur={(e) => blurHandler(e)}
                 value={userEmail}
               />
               <input
-                className={s.reg}
-                type="text"
+                className={
+                  userPassword && passwordError ? `${s.reg} ${s.error}` : s.reg
+                }
+                type="password"
+                name="password"
                 placeholder="Введите пароль..."
-                onChange={(e) => setUserPassword(e.target.value)}
+                onChange={(e) => passwordHandler(e)}
+                onBlur={(e) => blurHandler(e)}
                 value={userPassword}
               />
               <input
-                className={s.reg}
-                type="text"
+                className={
+                  repeatPasswordDirty && repeatPasswordError
+                    ? `${s.reg} ${s.error}`
+                    : s.reg
+                }
+                type="password"
+                name="repeatPassword"
                 placeholder="Повторите пароль..."
-                onChange={(e) => setUserRepeatPassword(e.target.value)}
-                value={repeatUserPassword}
+                onChange={(e) => repeatPasswordHandler(e)}
+                onBlur={(e) => blurHandler(e)}
+                value={userRepeatPassword}
               />
               <div className={s.button} onClick={() => registerHandler(user)}>
                 <a href="#">Зарегистрироваться</a>
               </div>
+              {nameDirty && nameError ? (
+                <div className={s.error}>{nameError}</div>
+              ) : emailDirty && emailError ? (
+                <div className={s.error}>{emailError}</div>
+              ) : passwordDirty && passwordError ? (
+                <div className={s.error}>{passwordError}</div>
+              ) : repeatPasswordDirty && repeatPasswordError ? (
+                <div className={s.error}>{repeatPasswordError}</div>
+              ) : (
+                ""
+              )}
               <div className={s.check_box}>
                 <input type="checkbox" id="scales" name="scales" />
                 <label htmlFor="scales">Запомнить меня</label>

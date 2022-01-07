@@ -34,25 +34,33 @@ function Header() {
             <nav className={s.nav}>
               <Link href="/login">
                 <a className={`${s.nav_item} ${s.auth_btn}`}>
-                  <img src="../img/header/comparison.svg" alt="" />
+                  <div className={s.icon_container}>
+                    <img src="../img/header/comparison.svg" alt="" />
+                  </div>
                   <div>Сравнение</div>
                 </a>
               </Link>
               <Link href="/basket">
                 <a href="./basket" className={s.nav_item}>
-                  <img src="../img/header/favorite.svg" alt="" />
+                  <div className={s.icon_container}>
+                    <img src="../img/header/favorite.svg" alt="" />
+                  </div>
                   <div>Избранное</div>
                 </a>
               </Link>
               <Link href="/basket">
                 <a href="./basket" className={s.nav_item}>
-                  <img src="../img/header/basket.svg" alt="" />
+                  <div className={s.icon_container}>
+                    <img src="../img/header/basket.svg" alt="" />
+                  </div>
                   <div>Корзина</div>
                 </a>
               </Link>
               <Link href="/login">
                 <a className={`${s.nav_item} ${s.auth_btn}`}>
-                  <img src="../img/header/user.svg" alt="" />
+                  <div className={s.icon_container}>
+                    <img src="../img/header/user.svg" alt="" />
+                  </div>
                   <div>Войти</div>
                 </a>
               </Link>
