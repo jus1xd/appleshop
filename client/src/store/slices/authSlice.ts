@@ -1,13 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../models/IUser";
-import { AuthReducer } from "../../types";
-import { login, logout, register } from "../actions/auth";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
+import {AuthReducer, IUser} from "../../types";
+import {login, logout, register} from "../actions/auth";
 
 const initialState: AuthReducer = {
-  user: {} as IUser,
-  isAuth: false,
-  isLoading: true,
-  error: "",
+    user: {} as IUser,
+    isAuth: false,
+    isLoading: true,
+    error: "",
 };
 
 export const authSlice = createSlice({
@@ -58,6 +58,7 @@ export const authSlice = createSlice({
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authMiddleware)
 });
 
-const { actions, reducer } = authSlice;
-export const { } = actions;
+
+const {actions, reducer} = authSlice;
+export const {} = actions;
 export default authSlice.reducer

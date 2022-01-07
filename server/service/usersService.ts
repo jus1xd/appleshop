@@ -69,7 +69,8 @@ class UserService {
     async addToCart ( idObject ) {
         const updatedUser = await UserModel.findById ( idObject.userId )
         updatedUser.cart.push ( idObject.productId )
-        return UserModel.findByIdAndUpdate ( idObject.userId, updatedUser, {new: true} );
+        const user = await UserModel.findByIdAndUpdate ( idObject.userId, updatedUser, {new: true} ).exec()
+        return user.cart
     }
 }
 

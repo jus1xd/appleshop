@@ -1,6 +1,6 @@
 export interface MainReducer {
   products: Product[];
-  cart: Product[];
+  cart: string[];
   isLoading: boolean;
   error: string;
 }
@@ -13,6 +13,11 @@ export interface AuthReducer {
 }
 
 export interface AuthResponse {
+  accessToken: string,
+  refreshToken: string,
+}
+
+export interface IUser {
   accessToken: string,
   refreshToken: string,
 }

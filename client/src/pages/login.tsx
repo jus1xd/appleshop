@@ -60,7 +60,6 @@ function loginPage() {
   };
 
   const dispatch = useAppDispatch();
-
   const user: TUser = {
     email: userEmail,
     password: userPassword,

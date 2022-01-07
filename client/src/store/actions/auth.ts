@@ -1,13 +1,13 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import { AuthResponse } from "../../types";
 
 const baseURL = "http://localhost:5000/api/";
 
 interface IData {
-  username?: string;
-  email: string;
-  password: string;
+    username?: string;
+    email: string;
+    password: string;
 }
 
 export const login = createAsyncThunk(

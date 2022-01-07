@@ -8,15 +8,17 @@ import { fetchAllProducts } from "../store/actions/fetchProducts";
 const Index = () => {
   const dispatch = useAppDispatch();
 
+  const userFromDB = useAppSelector ( state => state.authReducer.user )
   const data = useAppSelector((state) => state.productsReducer.products);
 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, []);
 
-  const cards = data.map((card) => <Card key={card._id} card={card} />);
+  //@ts-ignore
+  const cards = data.map((card) => <Card user={userFromDB} key={card._id} card={card} />);
   
-  return (
+  return (                 
     <>
       <Header />
       <section className={s.intro}>

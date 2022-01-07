@@ -1,9 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { register } from "../store/actions/auth";
-
 import s from "../styles/Auth.module.css";
 
 type TUser = {
