@@ -32,7 +32,7 @@ function Header() {
               <input type="text" placeholder="Искать.." />
             </div>
             <nav className={s.nav}>
-            <Link href="/login">
+              <Link href="/login">
                 <a className={`${s.nav_item} ${s.auth_btn}`}>
                   <img src="../img/header/comparison.svg" alt="" />
                   <div>Сравнение</div>
@@ -44,16 +44,16 @@ function Header() {
                   <div>Избранное</div>
                 </a>
               </Link>
-              <Link href="/login">
-                <a className={`${s.nav_item} ${s.auth_btn}`}>
-                  <img src="../img/header/user.svg" alt="" />
-                  <div>Войти</div>
-                </a>
-              </Link>
               <Link href="/basket">
                 <a href="./basket" className={s.nav_item}>
                   <img src="../img/header/basket.svg" alt="" />
                   <div>Корзина</div>
+                </a>
+              </Link>
+              <Link href="/login">
+                <a className={`${s.nav_item} ${s.auth_btn}`}>
+                  <img src="../img/header/user.svg" alt="" />
+                  <div>Войти</div>
                 </a>
               </Link>
             </nav>

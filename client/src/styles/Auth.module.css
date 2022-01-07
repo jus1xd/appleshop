@@ -43,6 +43,8 @@
   outline: none;
 }
 .button {
+  cursor: pointer;
+  transition: .2s;
   padding: 13px 76px;
   background: #253e63;
   border-radius: 10px;
@@ -51,6 +53,11 @@
   width: 330px;
   text-align: center;
 }
+
+.button:hover {
+  background: #1a2c47;
+}
+
 .button a {
   font-size: 15px;
   color: #fff;

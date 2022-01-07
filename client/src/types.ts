@@ -1,6 +1,6 @@
 export interface MainReducer {
   products: Product[];
-  cart: Product[];
+  cart: string[];
   isLoading: boolean;
   error: string;
 }

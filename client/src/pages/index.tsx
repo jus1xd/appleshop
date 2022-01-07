@@ -4,18 +4,16 @@ import Header from "../components/Header/Header";
 import s from "../styles/Index.module.css";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {fetchAllProducts} from "../store/actions/fetchProducts";
-
 const Index = () => {
     const dispatch = useAppDispatch ();
     const data = useAppSelector ( ( state ) => state.productsReducer.products );
+    const DbUser = useAppSelector(state => state.authReducer.user)
     useEffect ( () => {
         dispatch ( fetchAllProducts () );
-    }, [] );
+    }, [] )
+
     const cards = data.map ( ( card ) => (
-        <Card
-            key={card._id}
-            card={card}
-        />
+        <Card user = {DbUser} key={card._id} card={card}/>
     ) );
     return (
         <>

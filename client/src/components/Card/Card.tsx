@@ -1,25 +1,28 @@
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import axios from "axios";
 import s from "./Card.module.css";
 import {Product} from "../../types";
 import {addToCart} from "../../store/actions/fetchProducts";
+import jwtDecode from "jwt-decode";
+import {IUser} from "../../models/IUser";
 
 interface ICard {
     card: Product
+    user: IUser
     key: string
 }
 
-function Card ( {card}: ICard ) {
+function Card ( {card, user}: ICard ) {
     const [productId, setProductId] = useState<String> ( '' )
     const idForAddToCart = {
-        userId: "61d6f7640be09ca8afef5a95",
+        userId: jwtDecode ( `${user.accessToken}` ).id,
         productId: productId
     }
     const dispatch = useAppDispatch ();
     useEffect ( () => {
         if (productId) {
+            console.log ( idForAddToCart )
             dispatch ( addToCart ( idForAddToCart ) )
         }
     }, [productId] );
