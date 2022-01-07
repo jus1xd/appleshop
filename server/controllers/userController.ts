@@ -82,7 +82,16 @@ class UserController {
     async addToCart ( req, res, next ) {
         try {
             const idObject = req.body
-           return res.json(await usersService.addToCart ( idObject ))
+            return res.json ( await usersService.addToCart ( idObject ) )
+        } catch (e) {
+            next ( e );
+        }
+    }
+
+    async changeQuantity ( req, res, next ) {
+        try {
+            const idForServerQuantity = req.body
+            return res.json ( await usersService.changeQuantity( idForServerQuantity ) )
         } catch (e) {
             next ( e );
         }

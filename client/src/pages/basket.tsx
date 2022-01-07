@@ -10,21 +10,20 @@ import s from "../styles/Basket.module.css";
 const Basket = () => {
     const products = useAppSelector ( state => state.productsReducer.products )
     const cartItems = useAppSelector ( state => state.productsReducer.cart )
-    const basketItems = products.filter(item => cartItems.includes(item._id)).map ( ( product ) => (
+    const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( obj ) => obj.id === _id ) ).map ( ( product ) => (
         <BasketCard
             img={product.picture}
             name={product.title}
             cost={product.price}
+            id = {product._id}
             key={product._id}
         />
     ) );
-
     const [modalActive, setModalActive] = useState<boolean> ( false );
     const [onlinePayment, setOnlinePayment] = useState<boolean> ( true );
     const [payMethod, setPayMethod] = useState<string> ( "" );
     const [dateActive, setDateActive] = useState<string> ( "" );
     const [timeActive, setTimeActive] = useState<string> ( "" );
-
     return (
         <>
             <Header/>
@@ -46,7 +45,8 @@ const Basket = () => {
                             <div className={s.payment_values}>
                                 <div className={s.payment_total}>
                                     <div className={s.payment_subtitle}>Кол - во
-                                    :</div>
+                                        :
+                                    </div>
                                     <div className={s.total}>3</div>
                                 </div>
                                 <div className={s.payment_total}>

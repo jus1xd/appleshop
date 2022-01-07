@@ -68,8 +68,15 @@ class UserService {
 
     async addToCart ( idObject ) {
         const updatedUser = await UserModel.findById ( idObject.userId )
-        updatedUser.cart.push ( idObject.productId )
-        const user = await UserModel.findByIdAndUpdate ( idObject.userId, updatedUser, {new: true} ).exec()
+        updatedUser.cart.push ( {id: idObject.productId, quantity: 1} )
+        const user = await UserModel.findByIdAndUpdate ( idObject.userId, updatedUser, {new: true} ).exec ()
+        return user.cart
+    }
+
+    async changeQuantity ( idForServerQuantity ) {
+        const updatedUser = await UserModel.findById ( idForServerQuantity.userId )
+        updatedUser.cart.filter ( item => item.id === idForServerQuantity.productId )[0].quantity = idForServerQuantity.quantity
+        const user = await UserModel.findByIdAndUpdate ( idForServerQuantity.userId, updatedUser, {new: true} ).exec ()
         return user.cart
     }
 }

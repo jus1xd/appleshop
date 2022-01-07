@@ -2,20 +2,18 @@ import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import s from "./Card.module.css";
-import {Product} from "../../types";
+import {IUser, Product} from "../../types";
 import {addToCart} from "../../store/actions/fetchProducts";
 import jwtDecode from "jwt-decode";
-import {IUser} from "../../models/IUser";
-
 interface ICard {
     card: Product
     user: IUser
     key: string
 }
-
 function Card ( {card, user}: ICard ) {
     const [productId, setProductId] = useState<String> ( '' )
     const idForAddToCart = {
+        // @ts-ignore
         userId: jwtDecode ( `${user.accessToken}` ).id,
         productId: productId
     }

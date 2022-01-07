@@ -23,3 +23,9 @@ export const addToCart = createAsyncThunk (
         return res.data
     }
 )
+export const changeQuantity = createAsyncThunk (
+    'addToCart',
+    async ( idForServerQuantity: any, thunkAPI ) => {
+        const res = await axios.put ( 'http://localhost:5000/auth/changeQuantity', idForServerQuantity )
+    }
+)

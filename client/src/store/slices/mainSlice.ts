@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {MainReducer, Product} from "../../types";
+import {ICartItem, MainReducer, Product} from "../../types";
 import {addToCart, fetchAllProducts} from "../actions/fetchProducts";
 
 const initialState: MainReducer = {
@@ -26,7 +26,7 @@ export const mainSlice = createSlice ( {
             state.isLoading = false;
             state.error = action.payload;
         },
-        [addToCart.fulfilled.type]: ( state, action: PayloadAction<string[]> ) => {
+        [addToCart.fulfilled.type]: ( state, action: PayloadAction<ICartItem[]> ) => {
             state.cart = action.payload
         }
     },
