@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 
 import s from "./Header.module.css";
+import Category from "./Category/Category";
 
 function Header() {
+  const [categoryActive, setCategoryActive] = useState<boolean>(false);
+
   return (
     <>
       <Head>
@@ -24,7 +27,15 @@ function Header() {
                 <img src="../img/header/logo.png" alt="" />
               </a>
             </Link>
-            <div className={s.category_btn}>
+            <div
+              className={s.category_btn}
+              onMouseOver={() => setCategoryActive(true)}
+              onMouseLeave={() =>
+                setTimeout(() => {
+                  setCategoryActive(false);
+                }, 700)
+              }
+            >
               Категории
               <img src="../img/header/category.svg" alt="" />
             </div>
@@ -67,6 +78,7 @@ function Header() {
             </nav>
           </div>
         </div>
+        <Category active={categoryActive} setActive={setCategoryActive} />
       </header>
     </>
   );
