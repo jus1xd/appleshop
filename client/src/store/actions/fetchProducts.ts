@@ -16,16 +16,23 @@ export const fetchOneProduct = createAsyncThunk (
         return res.data
     }
 )
+
 export const addToCart = createAsyncThunk (
     'addToCart',
     async ( addToCart: any, thunkAPI ) => {
         const res = await axios.put ( 'http://localhost:5000/auth/addToCart', addToCart )
-        return res.data
     }
 )
 export const changeQuantity = createAsyncThunk (
     'addToCart',
     async ( idForServerQuantity: any, thunkAPI ) => {
         const res = await axios.put ( 'http://localhost:5000/auth/changeQuantity', idForServerQuantity )
+    }
+)
+export const getUserCart = createAsyncThunk (
+    'getUserCart',
+    async ( userId: any, thunkAPI ) => {
+        const res = await axios.get<Promise<Product[]>> ( `http://localhost:5000/auth/getCart/${userId}` )
+        return res.data
     }
 )

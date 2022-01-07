@@ -5,6 +5,7 @@ import tokenService from "./tokenService";
 import {UserDto} from "../dtos/userDto";
 import {sendActivationMail} from "./mailService";
 import {ApiError} from "../exceptions/api-error";
+import jwt from 'jsonwebtoken'
 
 class UserService {
     async registration ( username, email, password, role, cart ) {
@@ -77,6 +78,11 @@ class UserService {
         const updatedUser = await UserModel.findById ( idForServerQuantity.userId )
         updatedUser.cart.filter ( item => item.id === idForServerQuantity.productId )[0].quantity = idForServerQuantity.quantity
         const user = await UserModel.findByIdAndUpdate ( idForServerQuantity.userId, updatedUser, {new: true} ).exec ()
+        return user.cart
+    }
+
+    async getCart ( userId ) {
+        const user = await UserModel.findById ( userId ).exec()
         return user.cart
     }
 }

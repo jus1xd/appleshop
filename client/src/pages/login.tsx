@@ -13,6 +13,52 @@ type TUser = {
 function loginPage() {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
+
+  const [emailError, setEmailError] = useState<string>(
+    "Email не может быть пустым"
+  );
+  const [passwordError, setPasswordError] = useState<string>(
+    "Пароль некорректный"
+  );
+
+  const [emailDirty, setEmailDirty] = useState<boolean>(false);
+  const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
+
+  const emailHandler = (e: any) => {
+    setUserEmail(e.target.value);
+    if (!e.target.value) {
+      setEmailError("Email не может быть пустым");
+    } else if (!e.target.value.includes("@")) {
+      setEmailError("Некорректный email");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const passwordHandler = (e: any) => {
+    setUserPassword(e.target.value);
+    if (!e.target.value) {
+      setPasswordError("Пароль не должен быть пустым");
+    } else if (e.target.value < 4 || e.target.value > 16) {
+      setPasswordError("Пароль должен быть длинной 4-16 символов");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const blurHandler = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    switch (e.target.name) {
+      case "email":
+        setEmailDirty(true);
+        break;
+      case "password":
+        setPasswordDirty(true);
+        break;
+      default:
+        break;
+    }
+  };
+
   const dispatch = useAppDispatch();
   const user: TUser = {
     email: userEmail,
@@ -34,19 +80,34 @@ function loginPage() {
             <div className={s.register}>
               <div className={s.title_log}>Войдите в систему</div>
               <input
-                className={s.reg}
+                className={
+                  emailDirty && emailError ? `${s.reg} ${s.error}` : s.reg
+                }
                 type="text"
+                name="email"
                 placeholder="Введите email..."
-                onChange={(e) => setUserEmail(e.target.value)}
+                onChange={(e) => emailHandler(e)}
+                onBlur={(e) => blurHandler(e)}
                 value={userEmail}
               />
               <input
-                className={s.reg}
+                className={
+                  passwordDirty && passwordError ? `${s.reg} ${s.error}` : s.reg
+                }
                 type="password"
+                name="password"
                 placeholder="Введите пароль..."
-                onChange={(e) => setUserPassword(e.target.value)}
+                onChange={(e) => passwordHandler(e)}
+                onBlur={(e) => blurHandler(e)}
                 value={userPassword}
               />
+              {emailDirty && emailError ? (
+                <div className={s.error}>{emailError}</div>
+              ) : passwordDirty && passwordError ? (
+                <div className={s.error}>{passwordError}</div>
+              ) : (
+                ""
+              )}
               <div className={s.button} onClick={() => loginHandler(user)}>
                 <a href="#">Войти</a>
               </div>
