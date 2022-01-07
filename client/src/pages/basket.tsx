@@ -1,30 +1,36 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BasketCard from "../components/BasketCard/BasketCard";
 import DateItem from "../components/DateItem/DateItem";
 import TimeItem from "../components/TimeItem/TimeItem";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
-import {useAppSelector} from "../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import s from "../styles/Basket.module.css";
+import {getUserCart} from "../store/actions/fetchProducts";
+import jwtDecode from "jwt-decode";
 
 const Basket = () => {
-    const products = useAppSelector ( state => state.productsReducer.products )
+    const dispatch = useAppDispatch ()
+    const userFromDB = useAppSelector ( state => state.authReducer.user )
+    useEffect ( () => {
+        dispatch ( getUserCart ( "61d84ff8b8433d89b71f9d23" ))
+    }, [] );
     const cartItems = useAppSelector ( state => state.productsReducer.cart )
-    const basketItems = products.filter(item => cartItems.includes(item._id)).map ( ( product ) => (
+    const products = useAppSelector ( state => state.productsReducer.products )
+    const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( obj ) => obj.id === _id ) ).map ( ( product ) => (
         <BasketCard
             img={product.picture}
             name={product.title}
             cost={product.price}
+            id={product._id}
             key={product._id}
         />
     ) );
-
     const [modalActive, setModalActive] = useState<boolean> ( false );
     const [onlinePayment, setOnlinePayment] = useState<boolean> ( true );
     const [payMethod, setPayMethod] = useState<string> ( "" );
     const [dateActive, setDateActive] = useState<string> ( "" );
     const [timeActive, setTimeActive] = useState<string> ( "" );
-
     return (
         <>
             <Header/>
@@ -46,7 +52,8 @@ const Basket = () => {
                             <div className={s.payment_values}>
                                 <div className={s.payment_total}>
                                     <div className={s.payment_subtitle}>Кол - во
-                                    :</div>
+                                        :
+                                    </div>
                                     <div className={s.total}>3</div>
                                 </div>
                                 <div className={s.payment_total}>

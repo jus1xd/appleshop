@@ -13,7 +13,8 @@ userRouter.post(
 userRouter.post("/login", userController.login);
 userRouter.post("/logout", userController.logout);
 userRouter.get("/activate/:link", userController.activate);
+userRouter.get('/getCart/:userId', userController.getCart)
 userRouter.post("/refresh", userController.refresh);
 userRouter.put('/addToCart', userController.addToCart)
-
+userRouter.put('/changeQuantity', userController.changeQuantity)
 export default userRouter;

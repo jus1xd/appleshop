@@ -5,13 +5,11 @@ import s from "./Card.module.css";
 import { IUser, Product } from "../../types";
 import { addToCart } from "../../store/actions/fetchProducts";
 import jwtDecode from "jwt-decode";
-
 interface ICard {
   card: Product;
   user: IUser;
   key: string;
 }
-
 function Card({ card, user }: ICard) {
   const [productId, setProductId] = useState<String>("");
   const idForAddToCart = {

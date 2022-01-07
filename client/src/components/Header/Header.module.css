@@ -34,7 +34,7 @@
 .icon_container {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   margin: 0 auto;
   height: 22px;
   width: 24px;
