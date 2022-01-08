@@ -1,0 +1,55 @@
+/* header  */
+
+.wrapper {
+  background-color: #eaedf2;
+  position: absolute;
+  border-radius: 0px 0px 5px 5px;
+  top: 38px;
+  left: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+
+  transition: 0.4s;
+}
+
+.wrapper.active {
+  /* padding: 30px 0 50px 0; */
+  height: 270px;
+}
+
+.find_title {
+  font-size: 16px;
+  line-height: 14px;
+  color: var(--blue);
+  margin-top: 20px;
+  padding: 0 15px;
+  margin-bottom: 15px;
+}
+
+.find_item {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 14px;
+  padding: 8px 15px;
+
+  transition: 0.2s;
+}
+
+.find_item:hover {
+  background: rgba(44, 73, 116, 0.1);
+}
+
+.clear_items {
+  cursor: pointer;
+  text-align: right;
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 10px;
+  transition: 0.2s;
+  padding-right: 15px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.clear_items:hover {
+  color: rgba(0, 0, 0, 0.6);
+}

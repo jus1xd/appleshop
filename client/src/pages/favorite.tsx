@@ -13,7 +13,7 @@ const Favorite = () => {
   return (
     <>
       <Header />
-      <div className={s.compare}>
+      <div className={s.favorite}>
         <div className={s.container}>
           <div className={s.section_inner}>
             <div className={s.section_title}>Избранное</div>
