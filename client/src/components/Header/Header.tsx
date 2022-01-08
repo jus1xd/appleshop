@@ -4,9 +4,18 @@ import Head from "next/head";
 
 import s from "./Header.module.css";
 import Category from "./Category/Category";
+import Find from "./Find/Find";
+import BasketPopup from "./BasketPopup/BasketPopup";
 
 function Header() {
   const [categoryActive, setCategoryActive] = useState<boolean>(false);
+  const [findActive, setFindActive] = useState<boolean>(false);
+  const [basketActive, setBasketActive] = useState<boolean>(true);
+
+  function categoryHandler() {
+    setFindActive(false);
+    setCategoryActive(true);
+  }
 
   return (
     <>
@@ -29,7 +38,7 @@ function Header() {
             </Link>
             <div
               className={s.btn_container}
-              onMouseOver={() => setCategoryActive(true)}
+              onMouseOver={() => categoryHandler()}
               onMouseOut={() => setCategoryActive(false)}
             >
               <div className={s.category_btn}>
@@ -39,7 +48,17 @@ function Header() {
             </div>
 
             <div className={s.search}>
-              <input type="text" placeholder="Искать.." />
+              <input
+                className={
+                  findActive ? `${s.find_input} ${s.active}` : s.find_input
+                }
+                type="text"
+                placeholder="Искать.."
+                onFocus={() => setFindActive(true)}
+                onBlur={() => setFindActive(false)}
+              />
+              <img src="../img/header/find.svg" alt="" />
+              <Find active={findActive} setActive={setFindActive} />
             </div>
             <nav className={s.nav}>
               <Link href="/compare">
@@ -59,13 +78,18 @@ function Header() {
                 </a>
               </Link>
               <Link href="/basket">
-                <a className={s.nav_item}>
+                <a
+                  className={s.nav_item}
+                  onMouseOver={() => setBasketActive(true)}
+                  onMouseOut={() => setBasketActive(false)}
+                >
                   <div className={s.icon_container}>
                     <img src="../img/header/basket.svg" alt="" />
                   </div>
                   <div>Корзина</div>
                 </a>
               </Link>
+              <BasketPopup active={basketActive} setActive={setBasketActive} />
               <Link href="/login">
                 <a className={`${s.nav_item} ${s.auth_btn}`}>
                   <div className={s.icon_container}>

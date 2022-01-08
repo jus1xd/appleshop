@@ -29,6 +29,7 @@
 }
 
 .nav {
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -68,18 +69,33 @@
 }
 
 .search {
+  position: relative;
   max-width: 1000px;
   min-width: 200px;
   width: 100%;
 }
 
-.search input {
-  background-color: rgba(255, 255, 255, 0);
-  border: 1px solid #253e63;
+.find_input {
+  background-color: rgba(44, 73, 116, 0.1);
+  border: 1px solid #253e6300;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
   padding: 11px 15px 11px 15px;
   outline: none;
+  transition: 0.2s;
+}
+
+.find_input.active {
+  background-color: #eaedf2;
+}
+
+.search img {
+  position: absolute;
+  top: 11px;
+  right: 15px;
+
+  width: 18px;
+  height: 18px;
 }
 
 .logo {
