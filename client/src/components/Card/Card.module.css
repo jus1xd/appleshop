@@ -38,11 +38,21 @@
   height: 270px;
 }
 
+.card_btns {
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+}
+
 .main_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   cursor: pointer;
   width: max-content;
-  padding: 13px 50px;
+  padding: 11px 25px;
+  height: 45px;
   background: #253e63;
   border-radius: 10px;
   font-weight: 400;
@@ -54,4 +64,20 @@
 
 .main_btn:hover {
   background: #1c2f4d;
+}
+
+.icon_btn {
+  background-color: var(--white);
+  border: 2px solid var(--blue);
+  padding: 11px;
+}
+
+.icon_btn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.icon_btn img {
+  width: 22px;
+  height: 20px;
 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from "./BasketCard.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import jwtDecode from "jwt-decode";
@@ -7,6 +7,10 @@ import {ICartItems} from "../../types";
 
 function BasketCard ( {img, name, cost, id}: ICartItems ) {
     const userFromDB = useAppSelector ( state => state.authReducer.user )
+    useEffect ( () => {
+        // @ts-ignore
+        dispatch ( getUserCart (  jwtDecode ( `${userFromDB?.accessToken}` ).id, ) )
+    }, [] );
     const cart = useAppSelector ( state => state.productsReducer.cart )
     const dispatch = useAppDispatch ()
     const quantity = cart?.find ( e => e.id == id )?.quantity
@@ -23,7 +27,7 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
     }
     const onMinusHandler = ( quantity: number | undefined, productId: string | undefined ) => {
         if (quantity && productId) {
-            console.log (productId)
+            console.log ( productId )
             setQuantity ( quantity - 1, productId )
         }
     }

@@ -1,0 +1,22 @@
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 20px;
+  margin: 40px 0;
+  overflow: hidden;
+  height: 400px;
+}
+
+.wrapper video {
+  width: 100%;
+}
+
+.ban_title {
+  position: absolute;
+  font-size: 55px;
+  font-weight: 600;
+  color: #1d1d1f;
+}

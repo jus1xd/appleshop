@@ -5,14 +5,18 @@ import Head from "next/head";
 import s from "./Category.module.css";
 
 interface ICategory {
-  active: boolean,
-  setActive: React.Dispatch<React.SetStateAction<boolean>>
+  active: boolean;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Category({active, setActive}: ICategory) {
+function Category({ active, setActive }: ICategory) {
   return (
     <>
-      <div className={active? `${s.wrapper} ${s.active}` : s.wrapper} onMouseOver={() => setActive(true)}>
+      <div
+        className={active ? `${s.wrapper} ${s.active}` : s.wrapper}
+        onMouseOver={() => setActive(true)}
+        onMouseOut={() => setActive(false)}
+      >
         <div className={s.container}>
           <div className={s.category_inner}>
             <div className={s.column}>
@@ -38,7 +42,7 @@ function Category({active, setActive}: ICategory) {
               <div className={s.subtitle}>Mac Pro</div>
               <div className={s.subtitle}>Mac mini</div>
               <div className={s.subtitle}>Мониторы</div>
-              <div className={s.title}>MacBook</div>
+              <div className={`${s.title} ${s.sec_title}`}>MacBook</div>
               <div className={s.subtitle}>MacBook Air</div>
               <div className={s.subtitle}>MacBook Pro</div>
             </div>
@@ -46,7 +50,7 @@ function Category({active, setActive}: ICategory) {
               <div className={s.title}>Watch</div>
               <div className={s.subtitle}>Apple Watch Series 7</div>
               <div className={s.subtitle}>Apple Watch SE</div>
-              <div className={s.title}>iPad</div>
+              <div className={`${s.title} ${s.sec_title}`}>iPad</div>
               <div className={s.subtitle}>iPad Pro</div>
               <div className={s.subtitle}>iPad Air</div>
               <div className={s.subtitle}>iPad</div>
