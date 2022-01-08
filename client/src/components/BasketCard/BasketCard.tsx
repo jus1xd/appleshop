@@ -2,35 +2,35 @@ import React, {useState} from "react";
 import s from "./BasketCard.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import jwtDecode from "jwt-decode";
-import {changeQuantity} from "../../store/actions/fetchProducts";
-
-interface ICartItems {
-    img: string;
-    name: string;
-    cost: number;
-    id: string
-}
+import {changeQuantity, getUserCart} from "../../store/actions/fetchProducts";
+import {ICartItems} from "../../types";
 
 function BasketCard ( {img, name, cost, id}: ICartItems ) {
     const userFromDB = useAppSelector ( state => state.authReducer.user )
-    const [quantity, setQuantity] = useState<number> ( 1 )
-    const [productId, setProductId] = useState<string> ( '' )
-    const dispatch = useAppDispatch()
-    if (productId && quantity != 1) {
-        const setServerQuantity = {
-            // @ts-ignore
-            userId: jwtDecode ( `${userFromDB.accessToken}` ).id,
-            productId: productId,
-            quantity: quantity
+    const cart = useAppSelector ( state => state.productsReducer.cart )
+    const dispatch = useAppDispatch ()
+    const quantity = cart?.find ( e => e.id == id )?.quantity
+    const setQuantity = ( quantity: number, productId: string ) => {
+        if (productId && quantity >= 1) {
+            const setServerQuantity = {
+                // @ts-ignore
+                userId: jwtDecode ( `${userFromDB?.accessToken}` ).id,
+                productId: productId,
+                quantity: quantity
+            }
+            dispatch ( changeQuantity ( setServerQuantity ) )
         }
-        dispatch(changeQuantity(setServerQuantity))
-        console.log ( setServerQuantity )
     }
-    const onMinusHandler = ( quantity: number ) => {
-        quantity > 1 ? setQuantity ( quantity -= 1 ) : setQuantity ( 1 ), setProductId ( id )
+    const onMinusHandler = ( quantity: number | undefined, productId: string | undefined ) => {
+        if (quantity && productId) {
+            console.log (productId)
+            setQuantity ( quantity - 1, productId )
+        }
     }
-    const onPlusHandler = ( quantity: number ) => {
-        setQuantity ( quantity += 1 ), setProductId ( id )
+    const onPlusHandler = ( quantity: number | undefined, productId: string | undefined ) => {
+        if (quantity && productId) {
+            setQuantity ( quantity + 1, productId )
+        }
     }
     return (
         <div className={s.basket_card}>
@@ -41,9 +41,10 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
                 <div className={s.basket_name}>
                     <div className={s.basket_product_name}>{name}</div>
                     <div className={s.basket_counter}>
-                        <img onClick={() => onPlusHandler ( quantity )} src="../img/basket/plus.svg"/>
+                        <img onClick={() => onPlusHandler ( quantity, cart?.find ( e => e.id == id )?.id )}
+                             src="../img/basket/plus.svg"/>
                         <div className={s.counter_number}>{quantity}</div>
-                        <div onClick={() => onMinusHandler ( quantity )}>
+                        <div onClick={() => onMinusHandler ( quantity, cart?.find ( e => e.id == id )?.id )}>
                             <img src="../img/basket/minus.svg"/>
                         </div>
                     </div>

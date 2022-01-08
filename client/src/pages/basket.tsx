@@ -8,14 +8,16 @@ import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import s from "../styles/Basket.module.css";
 import {getUserCart} from "../store/actions/fetchProducts";
 import jwtDecode from "jwt-decode";
+import {log} from "util";
+
 
 const Basket = () => {
     const dispatch = useAppDispatch ()
-    const userFromDB = useAppSelector ( state => state.authReducer.user )
     useEffect ( () => {
-        dispatch ( getUserCart ( "61d84ff8b8433d89b71f9d23" ))
+        dispatch ( getUserCart ( "61d84ff8b8433d89b71f9d23" ) )
     }, [] );
     const cartItems = useAppSelector ( state => state.productsReducer.cart )
+    const result = cartItems.map ( item => item.quantity ).reduce( ( previousValue, currentValue) => {return previousValue + currentValue;} )
     const products = useAppSelector ( state => state.productsReducer.products )
     const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( obj ) => obj.id === _id ) ).map ( ( product ) => (
         <BasketCard
@@ -54,7 +56,7 @@ const Basket = () => {
                                     <div className={s.payment_subtitle}>Кол - во
                                         :
                                     </div>
-                                    <div className={s.total}>3</div>
+                                    <div className={s.total}>{result}</div>
                                 </div>
                                 <div className={s.payment_total}>
                                     <div className={s.payment_subtitle}>Итого:</div>

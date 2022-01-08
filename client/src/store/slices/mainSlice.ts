@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICartItem, MainReducer, Product} from "../../types";
-import {addToCart, fetchAllProducts, getUserCart} from "../actions/fetchProducts";
+import {addToCart, changeQuantity, fetchAllProducts, getUserCart} from "../actions/fetchProducts";
 
 const initialState: MainReducer = {
     products: [],
@@ -25,6 +25,9 @@ export const mainSlice = createSlice ( {
         [fetchAllProducts.rejected.type]: ( state, action: PayloadAction<string> ) => {
             state.isLoading = false;
             state.error = action.payload;
+        },
+        [changeQuantity.fulfilled.type]: ( state, action: PayloadAction<ICartItem[]> ) => {
+            state.cart = action.payload
         },
         [getUserCart.fulfilled.type]: ( state, action: PayloadAction<ICartItem[]> ) => {
             state.cart = action.payload

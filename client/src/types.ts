@@ -13,13 +13,13 @@ export interface AuthReducer {
 }
 
 export interface AuthResponse {
-  accessToken: string,
-  refreshToken: string,
+    accessToken: string,
+    refreshToken: string,
 }
 
 export interface IUser {
-  accessToken: string,
-  refreshToken: string,
+    accessToken: string,
+    refreshToken: string,
 }
 
 export interface Product {
@@ -37,7 +37,15 @@ export interface ICartItem {
     id: string
     quantity: number
 }
+
 export interface IUser {
-    refreshToken : string
-    accessToken : string
+    refreshToken: string
+    accessToken: string
+}
+
+export interface ICartItems {
+    img: string;
+    name: string;
+    cost: number;
+    id: string
 }

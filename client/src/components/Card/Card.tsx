@@ -17,7 +17,6 @@ function Card({ card, user }: ICard) {
     userId: jwtDecode(`${user.accessToken}`).id,
     productId: productId,
   };
-
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (productId) {
