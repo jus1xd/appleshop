@@ -105,6 +105,15 @@ class UserController {
             next ( e )
         }
     }
+
+    async deleteCartItem ( req, res, next ) {
+        try {
+            const itemToDelete = req.body
+            return res.json(await usersService.deleteCartItem(itemToDelete))
+        } catch (e) {
+            next ( e )
+        }
+    }
 }
 
 export default new UserController ();

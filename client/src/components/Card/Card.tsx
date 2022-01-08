@@ -3,7 +3,8 @@ import React, {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import s from "./Card.module.css";
 import {IUser, Product} from "../../types";
-import {addToCart} from "../../store/actions/fetchProducts";
+import {addToCart, changeQuantity} from "../../store/actions/fetchProducts";
+import {addToLocalCart} from '../../store/slices/mainSlice'
 import jwtDecode from "jwt-decode";
 
 interface ICard {
@@ -13,25 +14,35 @@ interface ICard {
 }
 
 function Card ( {card, user}: ICard ) {
-    const [productId, setProductId] = useState<String> ( "" );
-    const idForAddToCart = {
-        //@ts-ignore
-        userId: jwtDecode ( `${user.accessToken}` ).id,
-        productId: productId,
-    };
+    const [productId, setProductId] = useState<string> ( "" );
+    const cart = useAppSelector ( state => state.productsReducer.cart )
     const dispatch = useAppDispatch ();
     useEffect ( () => {
-        if (productId && user) {
-            dispatch (
-                addToCart ( {
+        if (productId && Object.keys ( user ).length != 0) {
+            cart.every ( item => item.id !== productId ) ?
+                dispatch (
+                    addToCart ( {
+                        //@ts-ignore
+                        userId: jwtDecode ( `${user.accessToken}` ).id,
+                        productId: productId,
+                        price: card.price
+                    } )
+                ) :
+                dispatch ( changeQuantity ( {
                     //@ts-ignore
                     userId: jwtDecode ( `${user.accessToken}` ).id,
                     productId: productId,
-                } )
-            );
+                    //@ts-ignore
+                    quantity: cart.find ( product => product.id == productId ).quantity + 1
+                } ) )
+        } else if (productId) {
+            dispatch ( addToLocalCart ( {
+                id: productId,
+                quantity: 1,
+                price: card.price
+            } ) )
         }
     }, [productId] );
-
     return (
         <div className={s.card}>
             <Link href={`./products/${card._id}`}>

@@ -5,7 +5,6 @@ import tokenService from "./tokenService";
 import {UserDto} from "../dtos/userDto";
 import {sendActivationMail} from "./mailService";
 import {ApiError} from "../exceptions/api-error";
-import jwt from 'jsonwebtoken'
 
 class UserService {
     async registration ( username, email, password, role, cart ) {
@@ -69,7 +68,7 @@ class UserService {
 
     async addToCart ( idObject ) {
         const updatedUser = await UserModel.findById ( idObject.userId )
-        updatedUser.cart.push ( {id: idObject.productId, quantity: 1} )
+        updatedUser.cart.push ( {id: idObject.productId, quantity: 1, price: idObject.price} )
         const user = await UserModel.findByIdAndUpdate ( idObject.userId, updatedUser, {new: true} ).exec ()
         return user.cart
     }
@@ -82,7 +81,14 @@ class UserService {
     }
 
     async getCart ( userId ) {
-        const user = await UserModel.findById ( userId ).exec()
+        const user = await UserModel.findById ( userId ).exec ()
+        return user.cart
+    }
+
+    async deleteCartItem ( itemToDelete ) {
+        const updatedUser = await UserModel.findById ( itemToDelete.userId )
+        updatedUser.cart = updatedUser.cart.filter ( product => product.id !== itemToDelete.productId )
+        const user = await UserModel.findByIdAndUpdate ( itemToDelete.userId, updatedUser, {new: true} ).exec ()
         return user.cart
     }
 }

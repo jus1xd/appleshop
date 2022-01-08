@@ -14,7 +14,7 @@ const Index = () => {
     dispatch(fetchAllProducts());
   }, []);
   const cards = data.map((card) => (
-    // @ts-ignore
+      //@ts-ignore
     <Card user={userFromDB} key={card._id} card={card} />
   ));
   return (

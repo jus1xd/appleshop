@@ -28,11 +28,11 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [register.fulfilled.type]: (state, action: PayloadAction<AuthReducer>) => {
+    [register.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
       state.isLoading = false;
       state.error = "";
-      state.user = action.payload.user;
-      state.isAuth = action.payload.isAuth;
+      state.user = action.payload;
+      state.isAuth = true;
     },
     [register.pending.type]: (state) => {
       state.isLoading = true;
@@ -55,10 +55,9 @@ export const authSlice = createSlice({
       state.error = action.payload;
     },
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authMiddleware)
 });
 
 
-const {actions, reducer} = authSlice;
+const {actions} = authSlice;
 export const {} = actions;
 export default authSlice.reducer

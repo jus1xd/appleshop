@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICartItem, MainReducer, Product} from "../../types";
-import {addToCart, changeQuantity, fetchAllProducts, getUserCart} from "../actions/fetchProducts";
+import {addToCart, changeQuantity, deleteCartItem, fetchAllProducts, getUserCart} from "../actions/fetchProducts";
+import {log} from "util";
 
 const initialState: MainReducer = {
     products: [],
@@ -12,7 +13,26 @@ const initialState: MainReducer = {
 export const mainSlice = createSlice ( {
     name: "mainSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        addToLocalCart ( state, action: PayloadAction<ICartItem> ) {
+            const exitingProduct = state.cart.find ( product => product.id === action.payload.id )
+            if (exitingProduct) {
+                state.cart.map ( product => product.id === action.payload.id ? product.quantity += 1 : product )
+            } else {
+                state.cart.push ( action.payload )
+            }
+        },
+        changeLocalQuantity ( state, action: PayloadAction<ICartItem> ) {
+            const exitingProduct = state.cart.find ( product => product.id === action.payload.id )
+            if (exitingProduct) {
+                exitingProduct.quantity = action.payload.quantity
+            }
+        },
+        removeFromLocalCart ( state, action: PayloadAction<string> ) {
+            state.cart = state.cart.filter ( product => product.id != action.payload )
+        }
+
+    },
     extraReducers: {
         [fetchAllProducts.fulfilled.type]: ( state, action: PayloadAction<Product[]> ) => {
             state.isLoading = false;
@@ -31,8 +51,11 @@ export const mainSlice = createSlice ( {
         },
         [getUserCart.fulfilled.type]: ( state, action: PayloadAction<ICartItem[]> ) => {
             state.cart = action.payload
-        }
+        },
+        [deleteCartItem.fulfilled.type]: ( state, action: PayloadAction<ICartItem[]> ) => {
+            state.cart = action.payload
+        },
     },
 } );
-
-export default mainSlice.reducer;
+export const {addToLocalCart, changeLocalQuantity, removeFromLocalCart} = mainSlice.actions
+export default mainSlice.reducer

@@ -4,14 +4,17 @@ import Header from "../components/Header/Header";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { register } from "../store/actions/auth";
 import s from "../styles/Auth.module.css";
+import {ICartItem} from "../types";
 
 type TUser = {
   username: string;
   email: string;
   password: string;
+  cart : ICartItem[]
 };
 
 function registerPage() {
+  const cart = useAppSelector(state => state.productsReducer.cart)
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
@@ -106,11 +109,11 @@ function registerPage() {
     username: userName,
     email: userEmail,
     password: userPassword,
+    cart : cart
   };
 
   const registerHandler = async (user: TUser) => {
     dispatch(register(user));
-    console.log(user);
   };
 
   return (

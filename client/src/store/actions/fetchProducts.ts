@@ -38,3 +38,10 @@ export const getUserCart = createAsyncThunk (
         return res.data
     }
 )
+export const deleteCartItem = createAsyncThunk (
+    'deleteCartItem',
+    async ( itemToDelete: any, thunkAPI ) => {
+        const res = await axios.put<Promise<Product[]>> ( `http://localhost:5000/auth/deleteCartItem`, itemToDelete )
+        return res.data
+    }
+)

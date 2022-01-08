@@ -9,7 +9,8 @@ const UserModel = new Schema ( {
     cart: {
         type: [{
             id: String,
-            quantity: Number
+            quantity: Number,
+            price : Number
         }], default: [], _id: false
     },
     activationLink: {type: String}

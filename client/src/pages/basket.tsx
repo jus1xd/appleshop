@@ -5,14 +5,37 @@ import TimeItem from "../components/TimeItem/TimeItem";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
-import s from "../styles/Basket.module.css";
 import {getUserCart} from "../store/actions/fetchProducts";
+import s from "../styles/Basket.module.css";
+import jwtDecode from "jwt-decode";
 
 const Basket = () => {
+    const dispatch = useAppDispatch ()
+    const userFromDB = useAppSelector ( state => state.authReducer.user )
     const cartItems = useAppSelector ( state => state.productsReducer.cart )
-    const result = cartItems.map ( item => item.quantity ).reduce( ( previousValue, currentValue) => {return previousValue + currentValue;} )
+    const [productCount, setProductCount] = useState<number> ( 0 )
+    const [priceCount, setPriceCount] = useState<number> ( 0 )
+    useEffect ( () => {
+        if (Object.keys ( userFromDB ).length != 0) {
+            // @ts-ignore
+            dispatch ( getUserCart ( jwtDecode ( `${userFromDB.accessToken}` ).id ) )
+        }
+    }, [] );
+    useEffect ( () => {
+        if (cartItems.length != 0) {
+            setProductCount ( cartItems.map ( item => item.quantity ).reduce ( ( previousValue: number, currentValue: number ) => {
+                return previousValue + currentValue;
+            } ) )
+            setPriceCount ( cartItems.map ( item => item.quantity * item.price! ).reduce ( ( previousValue: number, currentValue: number ) => {
+                return previousValue + currentValue;
+            } ) )
+        }
+        else {
+            setProductCount(0), setPriceCount(0)
+        }
+    }, [cartItems] );
     const products = useAppSelector ( state => state.productsReducer.products )
-    const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( obj ) => obj.id === _id ) ).map ( ( product ) => (
+     const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) ).map ( ( product ) => (
         <BasketCard
             img={product.picture}
             name={product.title}
@@ -29,7 +52,6 @@ const Basket = () => {
     return (
         <>
             <Header/>
-
             <section className={s.basket}>
                 <div className={s.container}>
                     <div className={s.section_title}>Корзина</div>
@@ -49,11 +71,11 @@ const Basket = () => {
                                     <div className={s.payment_subtitle}>Кол - во
                                         :
                                     </div>
-                                    <div className={s.total}>{result}</div>
+                                    <div className={s.total}>{productCount}</div>
                                 </div>
                                 <div className={s.payment_total}>
                                     <div className={s.payment_subtitle}>Итого:</div>
-                                    <div className={s.total}>89 991 ₽</div>
+                                    <div className={s.total}>{priceCount} ₽</div>
                                 </div>
                             </div>
 
