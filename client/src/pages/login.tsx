@@ -108,9 +108,16 @@ function loginPage() {
               ) : (
                 ""
               )}
-              <div className={s.button} onClick={() => loginHandler(user)}>
-                <a href="#">Войти</a>
-              </div>
+              {emailError || passwordError ? (
+                <div className={`${s.button} ${s.disabled}`}>
+                  <a href="#">Войти</a>
+                </div>
+              ) : (
+                <div className={s.button} onClick={() => loginHandler(user)}>
+                  <a href="#">Войти</a>
+                </div>
+              )}
+
               <div className={s.check_box}>
                 <input type="checkbox" id="scales" name="scales" />
                 <label htmlFor="scales">Запомнить меня</label>

@@ -2,9 +2,18 @@
 
 html,
 body {
+  background-color: rgba(251, 251, 253, 1);
   padding: 0;
   margin: 0;
+  color: #1d1d1f;
   font-family: SF Pro Display, sans-serif;
+  --white: rgba(251, 251, 253, 1);
+  --white-op: rgba(251, 251, 253, 0.7);
+  --blue: #253E63;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
 
 a {

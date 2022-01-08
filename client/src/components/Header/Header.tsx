@@ -28,22 +28,21 @@ function Header() {
               </a>
             </Link>
             <div
-              className={s.category_btn}
+              className={s.btn_container}
               onMouseOver={() => setCategoryActive(true)}
-              onMouseLeave={() =>
-                setTimeout(() => {
-                  setCategoryActive(false);
-                }, 700)
-              }
+              onMouseOut={() => setCategoryActive(false)}
             >
-              Категории
-              <img src="../img/header/category.svg" alt="" />
+              <div className={s.category_btn}>
+                Категории
+                <img src="../img/header/category.svg" alt="" />
+              </div>
             </div>
+
             <div className={s.search}>
               <input type="text" placeholder="Искать.." />
             </div>
             <nav className={s.nav}>
-              <Link href="/login">
+              <Link href="/compare">
                 <a className={`${s.nav_item} ${s.auth_btn}`}>
                   <div className={s.icon_container}>
                     <img src="../img/header/comparison.svg" alt="" />
@@ -51,8 +50,8 @@ function Header() {
                   <div>Сравнение</div>
                 </a>
               </Link>
-              <Link href="/basket">
-                <a href="./basket" className={s.nav_item}>
+              <Link href="/favorite">
+                <a className={s.nav_item}>
                   <div className={s.icon_container}>
                     <img src="../img/header/favorite.svg" alt="" />
                   </div>
@@ -60,7 +59,7 @@ function Header() {
                 </a>
               </Link>
               <Link href="/basket">
-                <a href="./basket" className={s.nav_item}>
+                <a className={s.nav_item}>
                   <div className={s.icon_container}>
                     <img src="../img/header/basket.svg" alt="" />
                   </div>
@@ -79,7 +78,7 @@ function Header() {
           </div>
         </div>
         <Category active={categoryActive} setActive={setCategoryActive} />
-      </header>
+      </header>{" "}
     </>
   );
 }

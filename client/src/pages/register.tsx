@@ -168,9 +168,18 @@ function registerPage() {
                 onBlur={(e) => blurHandler(e)}
                 value={userRepeatPassword}
               />
-              <div className={s.button} onClick={() => registerHandler(user)}>
-                <a href="#">Зарегистрироваться</a>
-              </div>
+              {nameError ||
+              emailError ||
+              passwordError ||
+              repeatPasswordError ? (
+                <div className={`${s.button} ${s.disabled}`}>
+                  <a href="#">Зарегистрироваться</a>
+                </div>
+              ) : (
+                <div className={s.button} onClick={() => registerHandler(user)}>
+                  <a href="#">Зарегистрироваться</a>
+                </div>
+              )}
               {nameDirty && nameError ? (
                 <div className={s.error}>{nameError}</div>
               ) : emailDirty && emailError ? (
