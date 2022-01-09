@@ -10,10 +10,16 @@ import { errorMiddleware } from "../middlewares/error-middleware";
 
 const app = express();
 app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL,
+  })
+);
 app.use(express.json());
 app.use(express.static("static"));
 app.use(fileUpload());
-app.use(cors());
+
 app.use("/api", productRouter);
 app.use("/auth", userRouter);
 app.use(errorMiddleware);

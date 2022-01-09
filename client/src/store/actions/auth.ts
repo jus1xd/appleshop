@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { instance } from "../../http";
 import { AuthResponse, ICartItem } from "../../types";
-
-const baseURL = "http://localhost:5000/api/";
 
 interface IData {
   cart?: ICartItem[];
