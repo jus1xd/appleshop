@@ -5,19 +5,20 @@ import TimeItem from "../components/TimeItem/TimeItem";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
-import {getUserCart} from "../store/actions/fetchProducts";
+import {fetchAllProducts, getUserCart} from "../store/actions/fetchProducts";
 import s from "../styles/Basket.module.css";
 import jwtDecode from "jwt-decode";
 
 const Basket = () => {
     const dispatch = useAppDispatch ()
     const userFromDB = useAppSelector ( state => state.authReducer.user )
+    const products = useAppSelector ( state => state.productsReducer.products )
     const cartItems = useAppSelector ( state => state.productsReducer.cart )
     const [productCount, setProductCount] = useState<number> ( 0 )
     const [priceCount, setPriceCount] = useState<number> ( 0 )
     useEffect ( () => {
         if (Object.keys ( userFromDB ).length != 0) {
-            // @ts-ignore
+            dispatch (fetchAllProducts ())
             dispatch ( getUserCart ( jwtDecode ( `${userFromDB.accessToken}` ).id ) )
         }
     }, [] );
@@ -29,13 +30,11 @@ const Basket = () => {
             setPriceCount ( cartItems.map ( item => item.quantity * item.price! ).reduce ( ( previousValue: number, currentValue: number ) => {
                 return previousValue + currentValue;
             } ) )
-        }
-        else {
-            setProductCount(0), setPriceCount(0)
+        } else {
+            setProductCount ( 0 ), setPriceCount ( 0 )
         }
     }, [cartItems] );
-    const products = useAppSelector ( state => state.productsReducer.products )
-     const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) ).map ( ( product ) => (
+    const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) ).map ( ( product ) => (
         <BasketCard
             img={product.picture}
             name={product.title}

@@ -18,8 +18,8 @@ export const authSlice = createSlice({
     [login.fulfilled.type]: (state, action: PayloadAction<AuthReducer>) => {
       state.isLoading = false;
       state.error = "";
-      state.user = action.payload.user;
-      state.isAuth = action.payload.isAuth;
+      state.user = action.payload;
+      state.isAuth = true;
     },
     [login.pending.type]: (state) => {
       state.isLoading = true;

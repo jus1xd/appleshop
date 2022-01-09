@@ -55,14 +55,14 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
                 <div className={s.basket_name}>
                     <div className={s.basket_product_name}>{name}</div>
                     <div className={s.basket_counter}>
-                        <img
-                            onClick={() => onPlusHandler ( quantity, cart?.find ( e => e.id == id )?.id )}
-                            src="../img/basket/plus.svg"/>
-                        <div className={s.counter_number}>{quantity}</div>
                         <div
                             onClick={() => onMinusHandler ( quantity, cart?.find ( e => e.id == id )?.id )}>
                             <img src="../img/basket/minus.svg"/>
                         </div>
+                        <div className={s.counter_number}>{quantity}</div>
+                        <img
+                            onClick={() => onPlusHandler ( quantity, cart?.find ( e => e.id == id )?.id )}
+                            src="../img/basket/plus.svg"/>
                     </div>
                 </div>
             </div>
