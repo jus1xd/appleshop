@@ -34,10 +34,7 @@ class UserController {
         try {
             const {email, password} = req.body;
             const userData = await usersService.login ( email, password );
-            res.cookie ( "refreshToken", userData.refreshToken, {
-                maxAge: 30 * 24 * 60 * 60 * 1000,
-                httpOnly: true,
-            } );
+            res.cookie ( 'refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true} )
             return res.json ( userData );
         } catch (e) {
             next ( e );
@@ -47,7 +44,7 @@ class UserController {
     async logout ( req, res, next ) {
         try {
             const {refreshToken} = req.cookies;
-            console.log (refreshtoken)
+            console.log ( refreshToken )
             await usersService.logout ( refreshToken );
             res.clearCookie ( "refreshToken" );
             return res.status ( 200 ).json ( {message: "Пользователь вышел из системы"} );
@@ -82,8 +79,8 @@ class UserController {
 
     async addToCart ( req, res, next ) {
         try {
-            const idObject = req.body
-            return res.json ( await usersService.addToCart ( idObject ) )
+            const idObject = req.body;
+            return res.json ( await usersService.addToCart ( idObject ) );
         } catch (e) {
             next ( e );
         }
@@ -91,8 +88,8 @@ class UserController {
 
     async changeQuantity ( req, res, next ) {
         try {
-            const idForServerQuantity = req.body
-            return res.json ( await usersService.changeQuantity ( idForServerQuantity ) )
+            const idForServerQuantity = req.body;
+            return res.json ( await usersService.changeQuantity ( idForServerQuantity ) );
         } catch (e) {
             next ( e );
         }
@@ -100,19 +97,19 @@ class UserController {
 
     async getCart ( req, res, next ) {
         try {
-            const userId = req.params.userId
-            return res.json ( await usersService.getCart ( userId ) )
+            const userId = req.params.userId;
+            return res.json ( await usersService.getCart ( userId ) );
         } catch (e) {
-            next ( e )
+            next ( e );
         }
     }
 
     async deleteCartItem ( req, res, next ) {
         try {
-            const itemToDelete = req.body
-            return res.json(await usersService.deleteCartItem(itemToDelete))
+            const itemToDelete = req.body;
+            return res.json ( await usersService.deleteCartItem ( itemToDelete ) );
         } catch (e) {
-            next ( e )
+            next ( e );
         }
     }
 }

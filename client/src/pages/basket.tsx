@@ -10,39 +10,56 @@ import s from "../styles/Basket.module.css";
 import jwtDecode from "jwt-decode";
 
 const Basket = () => {
-    const dispatch = useAppDispatch ()
-    const userFromDB = useAppSelector ( state => state.authReducer.user )
-    const products = useAppSelector ( state => state.productsReducer.products )
-    const cartItems = useAppSelector ( state => state.productsReducer.cart )
-    const [productCount, setProductCount] = useState<number> ( 0 )
-    const [priceCount, setPriceCount] = useState<number> ( 0 )
+    const dispatch = useAppDispatch ();
+    const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
+    const cartItems = useAppSelector ( ( state ) => state.productsReducer.cart );
+    const products = useAppSelector ( ( state ) => state.productsReducer.products );
+
+    const [productCount, setProductCount] = useState<number> ( 0 );
+    const [priceCount, setPriceCount] = useState<number> ( 0 );
+
     useEffect ( () => {
         if (Object.keys ( userFromDB ).length != 0) {
-            dispatch (fetchAllProducts ())
-            dispatch ( getUserCart ( jwtDecode ( `${userFromDB.accessToken}` ).id ) )
+            console.log ( products );
+            if (products.length === 0) {
+                dispatch ( fetchAllProducts () );
+            }
+            // @ts-ignore
+            dispatch ( getUserCart ( jwtDecode ( ` ${userFromDB.accessToken} ` ).id ) );
         }
     }, [] );
+
     useEffect ( () => {
         if (cartItems.length != 0) {
-            setProductCount ( cartItems.map ( item => item.quantity ).reduce ( ( previousValue: number, currentValue: number ) => {
-                return previousValue + currentValue;
-            } ) )
-            setPriceCount ( cartItems.map ( item => item.quantity * item.price! ).reduce ( ( previousValue: number, currentValue: number ) => {
-                return previousValue + currentValue;
-            } ) )
+            setProductCount (
+                cartItems
+                    .map ( ( item ) => item.quantity )
+                    .reduce ( ( previousValue: number, currentValue: number ) => {
+                        return previousValue + currentValue;
+                    } )
+            );
+            setPriceCount (
+                cartItems
+                    .map ( ( item ) => item.quantity * item.price! )
+                    .reduce ( ( previousValue: number, currentValue: number ) => {
+                        return previousValue + currentValue;
+                    } )
+            );
         } else {
-            setProductCount ( 0 ), setPriceCount ( 0 )
+            setProductCount ( 0 ), setPriceCount ( 0 );
         }
     }, [cartItems] );
-    const basketItems = products.filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) ).map ( ( product ) => (
-        <BasketCard
-            img={product.picture}
-            name={product.title}
-            cost={product.price}
-            id={product._id}
-            key={product._id}
-        />
-    ) );
+    const basketItems = products
+        .filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) )
+        .map ( ( product ) => (
+            <BasketCard
+                img={product.picture}
+                name={product.title}
+                cost={product.price}
+                id={product._id}
+                key={product._id}
+            />
+        ) );
     const [modalActive, setModalActive] = useState<boolean> ( false );
     const [onlinePayment, setOnlinePayment] = useState<boolean> ( true );
     const [payMethod, setPayMethod] = useState<string> ( "" );
@@ -54,35 +71,44 @@ const Basket = () => {
             <section className={s.basket}>
                 <div className={s.container}>
                     <div className={s.section_title}>Корзина</div>
-                    <div className={s.basket_inner}>
-                        <div className={s.basket_cards}>
-                            {basketItems.length > 0 ? basketItems : "Корзина пуста"}
-                        </div>
-
-                        <div className={s.payment}>
-                            <div className={s.payment_title}>Оформить заказ</div>
-                            <div className={s.payment_subtitle_text}>
-                                Вы можете оплатить заказ на сайте или при получении товара у
-                                курьера.
-                            </div>
-                            <div className={s.payment_values}>
-                                <div className={s.payment_total}>
-                                    <div className={s.payment_subtitle}>Кол - во
-                                        :
+                    {basketItems.length > 0 ? (
+                        <div className={s.basket_inner}>
+                            <div className={s.basket_cards}>{basketItems}</div>
+                            <div className={s.payment}>
+                                <div className={s.payment_title}>Оформить заказ</div>
+                                <div className={s.payment_subtitle_text}>
+                                    Вы можете оплатить заказ на сайте или при получении товара у
+                                    курьера.
+                                </div>
+                                <div className={s.payment_values}>
+                                    <div className={s.payment_total}>
+                                        <div className={s.payment_subtitle}>Кол - во :</div>
+                                        <div className={s.total}>{productCount}</div>
                                     </div>
-                                    <div className={s.total}>{productCount}</div>
+                                    <div className={s.payment_total}>
+                                        <div className={s.payment_subtitle}>Итого:</div>
+                                        <div className={s.total}>{priceCount} ₽</div>
+                                    </div>
                                 </div>
-                                <div className={s.payment_total}>
-                                    <div className={s.payment_subtitle}>Итого:</div>
-                                    <div className={s.total}>{priceCount} ₽</div>
+                                <div
+                                    className={s.main_btn}
+                                    onClick={() => setModalActive ( true )}
+                                >
+                                    Перейти к оплате
                                 </div>
-                            </div>
-
-                            <div className={s.main_btn} onClick={() => setModalActive ( true )}>
-                                Перейти к оплате
                             </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className={s.error_wrapper}>
+                            <div className={s.error_icon}>( o ^ ^ )
+                            o</div>
+                            <div className={s.error_title}>Корзина пуста</div>
+                            <div className={s.error_subtitle}>
+                                Чтобы добавить товары в корзину, кликните на кнопку “В корзину”
+                                у товара
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 

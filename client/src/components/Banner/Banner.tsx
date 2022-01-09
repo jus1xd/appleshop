@@ -14,13 +14,13 @@ function Banner({ url, title, subtitle, type }: IBanner) {
       {type === "mp4" ? (
         <video
           width="1170px"
-          src={`../img/banner/${url}.mp4`}
+          src={`../img/afisha/${url}.mp4`}
           autoPlay={true}
           loop={true}
           controls={false}
         />
       ) : (
-        <img src={`../img/banner/${url}.png`} />
+        <img src={`../img/afisha/${url}.png`} />
       )}
       <div className={s.ban_title}>
         {title} <span>{subtitle}</span>

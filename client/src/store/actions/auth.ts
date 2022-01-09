@@ -2,10 +2,10 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {AuthResponse, ICartItem} from "../../types";
 
-const baseURL = "http://localhost:5000/api/";
+axios.defaults.withCredentials = true;
 
 interface IData {
-    cart: ICartItem[];
+    cart?: ICartItem[];
     username?: string;
     email: string;
     password: string;
@@ -19,7 +19,7 @@ export const login = createAsyncThunk (
             {
                 email,
                 password,
-            }
+            }, {withCredentials: true}
         );
         return res.data;
     }
@@ -34,12 +34,12 @@ export const register = createAsyncThunk (
                 username: user.username,
                 email: user.email,
                 password: user.password,
-                cart: user.cart
-            }
-        );  
+                cart: user.cart,
+            }, {withCredentials: true}
+        );
         return res.data;
     }
 );
 export const logout = createAsyncThunk ( "logout", async ( _, thunkAPI ) => {
-    const res = await axios.post ( "http://localhost:5000/auth/logout" );
+    const res = await axios.post ( "http://localhost:5000/auth/logout", {}, {withCredentials: true} );
 } );
