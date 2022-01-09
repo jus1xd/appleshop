@@ -10,13 +10,16 @@ const Index = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.productsReducer.products);
   const userFromDB = useAppSelector((state) => state.authReducer.user);
+
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, []);
+
   const cards = data.map((card) => (
-      //@ts-ignore
+    //@ts-ignore
     <Card user={userFromDB} key={card._id} card={card} />
   ));
+  
   return (
     <>
       <Header />
@@ -32,9 +35,19 @@ const Index = () => {
         <div className={s.container}>
           <div className={s.section_title}>Хиты продаж</div>
           <div className={s.heat_inner}>{cards.slice(0, 8)}</div>
-          <Banner url='airpods' title='Попробуйте' subtitle='AirPods' type='mp4'/>
+          <Banner
+            url="airpods"
+            title="Попробуйте"
+            subtitle="AirPods"
+            type="mp4"
+          />
           <div className={s.heat_inner}>{cards.slice(8, 16)}</div>
-          <Banner url='macbook' title='Попробуйте' subtitle='MacBook' type='png'/>
+          <Banner
+            url="macbook"
+            title="Попробуйте"
+            subtitle="MacBook"
+            type="png"
+          />
         </div>
       </section>
     </>

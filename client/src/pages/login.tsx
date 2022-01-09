@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
 import { useAppDispatch } from "../hooks/redux";
@@ -23,6 +24,8 @@ function loginPage() {
 
   const [emailDirty, setEmailDirty] = useState<boolean>(false);
   const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const emailHandler = (e: any) => {
     setUserEmail(e.target.value);
@@ -67,6 +70,8 @@ function loginPage() {
 
   const loginHandler = async (user: TUser) => {
     dispatch(login(user));
+    router.push("/");
+
     console.log(user);
   };
 

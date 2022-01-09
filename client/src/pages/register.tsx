@@ -1,20 +1,21 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { register } from "../store/actions/auth";
 import s from "../styles/Auth.module.css";
-import {ICartItem} from "../types";
+import { ICartItem } from "../types";
 
 type TUser = {
   username: string;
   email: string;
   password: string;
-  cart : ICartItem[]
+  cart: ICartItem[];
 };
 
 function registerPage() {
-  const cart = useAppSelector(state => state.productsReducer.cart)
+  const cart = useAppSelector((state) => state.productsReducer.cart);
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
@@ -38,6 +39,8 @@ function registerPage() {
   const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
   const [repeatPasswordDirty, setRepeatPasswordDirty] =
     useState<boolean>(false);
+
+  const router = useRouter();
 
   const usernameHandler = (e: any) => {
     setUserName(e.target.value);
@@ -109,11 +112,12 @@ function registerPage() {
     username: userName,
     email: userEmail,
     password: userPassword,
-    cart : cart
+    cart: cart,
   };
 
   const registerHandler = async (user: TUser) => {
     dispatch(register(user));
+    router.push("/");
   };
 
   return (

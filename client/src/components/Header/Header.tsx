@@ -6,11 +6,16 @@ import s from "./Header.module.css";
 import Category from "./Category/Category";
 import Find from "./Find/Find";
 import BasketPopup from "./BasketPopup/BasketPopup";
+import ProfilePopup from "./ProfilePopup/ProfilePopup";
+import { useAppSelector } from "../../hooks/redux";
 
 function Header() {
   const [categoryActive, setCategoryActive] = useState<boolean>(false);
   const [findActive, setFindActive] = useState<boolean>(false);
-  const [basketActive, setBasketActive] = useState<boolean>(true);
+  const [basketActive, setBasketActive] = useState<boolean>(false);
+  const [profileActive, setProfileActive] = useState<boolean>(false);
+
+  const curUser = useAppSelector((state) => state.authReducer);
 
   function categoryHandler() {
     setFindActive(false);
@@ -90,14 +95,37 @@ function Header() {
                 </a>
               </Link>
               <BasketPopup active={basketActive} setActive={setBasketActive} />
-              <Link href="/login">
-                <a className={`${s.nav_item} ${s.auth_btn}`}>
-                  <div className={s.icon_container}>
-                    <img src="../img/header/user.svg" alt="" />
-                  </div>
-                  <div>Войти</div>
-                </a>
-              </Link>
+              {
+                //@ts-ignore
+                curUser.isAuth ? (
+                  <Link href="/profile">
+                    <a
+                      className={`${s.nav_item} ${s.profile_btn}`}
+                      onMouseOver={() => setProfileActive(true)}
+                      onMouseOut={() => setProfileActive(false)}
+                    >
+                      <div className={s.icon_container}>
+                        <img src="../img/header/profile.png" alt="" />
+                      </div>
+                      <div>Профиль</div>
+                    </a>
+                  </Link>
+                ) : (
+                  <Link href="/login">
+                    <a className={`${s.nav_item}`}>
+                      <div className={s.icon_container}>
+                        <img src="../img/header/user.svg" alt="" />
+                      </div>
+                      <div>Войти</div>
+                    </a>
+                  </Link>
+                )
+              }
+              <ProfilePopup
+                active={profileActive}
+                setActive={setProfileActive}
+                user={curUser.user}
+              />
             </nav>
           </div>
         </div>

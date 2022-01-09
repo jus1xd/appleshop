@@ -1,0 +1,88 @@
+/* header  */
+
+.main_wrapper {
+  display: flex;
+  align-items: flex-end;
+  height: 240px;
+  position: absolute;
+  pointer-events: none;
+  top: 42px;
+  right: 0;
+  width: 230px;
+}
+
+.main_wrapper.active {
+  pointer-events: all;
+}
+
+.wrapper {
+  margin-top: auto;
+  overflow: hidden;
+  width: 100%;
+  opacity: 0;
+  padding: 15px 0px;
+
+  pointer-events: none;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  transition: 0.3s;
+}
+
+.wrapper.active {
+  /* padding: 30px 0 50px 0; */
+  /* display: block; */
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cur_profile {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.profile_name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.nav_item {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 7px 15px;
+  transition: 0.2s;
+}
+
+.nav_item:hover {
+  background: rgba(44, 73, 116, 0.1);
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.avatar img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav {
+  margin-top: 15px;
+}
+
+.logout {
+  cursor: pointer;
+  color: #d25047;
+  transition: 0.2s;
+  padding: 7px 15px;
+}
+
+.logout:hover {
+  background-color: #d2504725;
+}
