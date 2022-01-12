@@ -101,7 +101,8 @@ const Basket = () => {
                     ) : (
                         <div className={s.error_wrapper}>
                             <div className={s.error_icon}>( o ^ ^ )
-                            o</div>
+                                o
+                            </div>
                             <div className={s.error_title}>Корзина пуста</div>
                             <div className={s.error_subtitle}>
                                 Чтобы добавить товары в корзину, кликните на кнопку “В корзину”
