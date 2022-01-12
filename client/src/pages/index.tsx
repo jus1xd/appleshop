@@ -10,11 +10,9 @@ const Index = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.productsReducer.products);
   const userFromDB = useAppSelector((state) => state.authReducer.user);
-
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, []);
-
   const cards = data.map((card) => (
     //@ts-ignore
     <Card user={userFromDB} key={card._id} card={card} />

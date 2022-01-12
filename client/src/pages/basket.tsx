@@ -60,11 +60,23 @@ const Basket = () => {
         key={product._id}
       />
     ));
+
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [onlinePayment, setOnlinePayment] = useState<boolean>(true);
   const [payMethod, setPayMethod] = useState<string>("");
   const [dateActive, setDateActive] = useState<string>("");
   const [timeActive, setTimeActive] = useState<string>("");
+
+  //   Date
+
+  let date = new Date();
+  let dd: number | string = date.getDate()
+  let mm: number | string = (date.getMonth() + 1)
+  dd = dd < 10 ? '0' + dd.toString() : dd.toString()
+  mm = mm < 10 ? '0' + mm.toString() : mm.toString()
+
+  let today: string = dd + mm;
+
   return (
     <>
       <Header />
@@ -87,7 +99,32 @@ const Basket = () => {
                   </div>
                   <div className={s.payment_total}>
                     <div className={s.payment_subtitle}>Итого:</div>
-                    <div className={s.total}>{priceCount} ₽</div>
+                    <div className={s.total}>
+                      {priceCount.toString().length === 8
+                        ? `${priceCount.toString().slice(0, 2)} ${priceCount
+                            .toString()
+                            .slice(2, 5)} ${priceCount.toString().slice(5, 8)} `
+                        : priceCount.toString().length === 7
+                        ? `${priceCount.toString().slice(0, 1)} ${priceCount
+                            .toString()
+                            .slice(1, 4)} ${priceCount.toString().slice(4, 7)} `
+                        : priceCount.toString().length === 6
+                        ? `${priceCount.toString().slice(0, 3)} ${priceCount
+                            .toString()
+                            .slice(3, 6)} `
+                        : priceCount.toString().length === 5
+                        ? `${priceCount.toString().slice(0, 2)} ${priceCount
+                            .toString()
+                            .slice(2, 5)} `
+                        : priceCount.toString().length === 4
+                        ? `${priceCount.toString().slice(0, 1)} ${priceCount
+                            .toString()
+                            .slice(1, 4)} `
+                        : priceCount.toString().length === 3
+                        ? `${priceCount.toString().slice(0, 3)} `
+                        : `${priceCount.toString()}`}
+                      ₽
+                    </div>
                   </div>
                 </div>
                 <div
@@ -119,7 +156,7 @@ const Basket = () => {
             <input className={s.modal_input} type="text" placeholder="Имя.." />
             <input
               className={s.modal_input}
-              type="text"
+              type="number"
               placeholder="Номер телефона.."
             />
             <input
@@ -131,47 +168,47 @@ const Basket = () => {
           <div className={s.modal_subtitle}>Выбери дату:</div>
           <div className={s.date_items}>
             <DateItem
-              date="5 янв"
+              date={parseInt(today) + (3 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="6 янв"
+              date={parseInt(today) + (4 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="7 янв"
+              date={parseInt(today) + (5 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="8 янв"
+              date={parseInt(today) + (6 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="9 янв"
+              date={parseInt(today) + (7 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="10 янв"
+              date={parseInt(today) + (8 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="11 янв"
+              date={parseInt(today) + (9 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="12 янв"
+              date={parseInt(today) + (10 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />
             <DateItem
-              date="13 янв"
+              date={parseInt(today) + (11 * 100) + (0 * 1)}
               dateActive={dateActive}
               setDate={setDateActive}
             />

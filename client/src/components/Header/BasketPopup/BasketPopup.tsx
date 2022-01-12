@@ -34,6 +34,62 @@ function BasketPopup({ active, setActive }: BasketPopup) {
                 <img src="../img/header/remove.svg" alt="" />
               </div>
             </div>
+            <div className={s.basket_item}>
+              <div className={s.item_leftside}>
+                <img src="../img/heatsells/4.png" alt="" />
+                <div className={s.item_title}>
+                  Apple iPhone 13, 512ГБ, «красный»
+                </div>
+              </div>
+              <div className={s.item_rightside}>
+                <div className={s.item_cost}>79 999 ₽</div>
+                <img src="../img/header/remove.svg" alt="" />
+              </div>
+            </div><div className={s.basket_item}>
+              <div className={s.item_leftside}>
+                <img src="../img/heatsells/4.png" alt="" />
+                <div className={s.item_title}>
+                  Apple iPhone 13, 512ГБ, «красный»
+                </div>
+              </div>
+              <div className={s.item_rightside}>
+                <div className={s.item_cost}>79 999 ₽</div>
+                <img src="../img/header/remove.svg" alt="" />
+              </div>
+            </div><div className={s.basket_item}>
+              <div className={s.item_leftside}>
+                <img src="../img/heatsells/4.png" alt="" />
+                <div className={s.item_title}>
+                  Apple iPhone 13, 512ГБ, «красный»
+                </div>
+              </div>
+              <div className={s.item_rightside}>
+                <div className={s.item_cost}>79 999 ₽</div>
+                <img src="../img/header/remove.svg" alt="" />
+              </div>
+            </div><div className={s.basket_item}>
+              <div className={s.item_leftside}>
+                <img src="../img/heatsells/4.png" alt="" />
+                <div className={s.item_title}>
+                  Apple iPhone 13, 512ГБ, «красный»
+                </div>
+              </div>
+              <div className={s.item_rightside}>
+                <div className={s.item_cost}>79 999 ₽</div>
+                <img src="../img/header/remove.svg" alt="" />
+              </div>
+            </div><div className={s.basket_item}>
+              <div className={s.item_leftside}>
+                <img src="../img/heatsells/4.png" alt="" />
+                <div className={s.item_title}>
+                  Apple iPhone 13, 512ГБ, «красный»
+                </div>
+              </div>
+              <div className={s.item_rightside}>
+                <div className={s.item_cost}>79 999 ₽</div>
+                <img src="../img/header/remove.svg" alt="" />
+              </div>
+            </div>
           </div>
           <div className={s.total}>
             <div className={s.popup_btn}>Купить</div>

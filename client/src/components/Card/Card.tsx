@@ -58,7 +58,31 @@ function Card({ card, user }: ICard) {
       <Link href={`./products/${card._id}`}>
         <a className={s.card_title}>{card.title}</a>
       </Link>
-      <div className={s.card_cost}>{card.price} ₽</div>
+      <div className={s.card_cost}>
+        {card.price.toString().length === 8
+          ? `${card.price.toString().slice(0, 2)} ${card.price
+              .toString()
+              .slice(2, 5)} ${card.price.toString().slice(5, 8)} `
+          : card.price.toString().length === 7
+          ? `${card.price.toString().slice(0, 1)} ${card.price
+              .toString()
+              .slice(1, 4)} ${card.price.toString().slice(4, 7)} `
+          : card.price.toString().length === 6
+          ? `${card.price.toString().slice(0, 3)} ${card.price
+              .toString()
+              .slice(3, 6)} `
+          : card.price.toString().length === 5
+          ? `${card.price.toString().slice(0, 2)} ${card.price
+              .toString()
+              .slice(2, 5)} `
+          : card.price.toString().length === 4
+          ? `${card.price.toString().slice(0, 1)} ${card.price
+              .toString()
+              .slice(1, 4)} `
+          : card.price.toString().length === 3
+          ? `${card.price.toString().slice(0, 3)} `
+          : `${card.price.toString()}`} ₽
+      </div>
       <div className={s.card_btns}>
         <div className={s.main_btn} onClick={() => setProductId(card._id)}>
           В корзину
