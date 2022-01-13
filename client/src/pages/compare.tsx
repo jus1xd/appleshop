@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
-import BasketCard from "../components/BasketCard/BasketCard";
-import DateItem from "../components/DateItem/DateItem";
-import TimeItem from "../components/TimeItem/TimeItem";
+import React from "react";
 import Header from "../components/Header/Header";
-import Modal from "../components/Modal/Modal";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import s from "../styles/Compare.module.css";
-import { getUserCart } from "../store/actions/fetchProducts";
-import jwtDecode from "jwt-decode";
 
 const Compare = () => {
   return (

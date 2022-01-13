@@ -1,10 +1,9 @@
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {addToCart, changeQuantity, fetchOneProduct} from "../../store/actions/fetchProducts";
-import {addToLocalCart} from "../../store/slices/mainSlice";
+import {fetchOneProduct} from "../../store/actions/fetchProducts";
 import s from "./ProductInfo.module.css";
-import jwtDecode from "jwt-decode";
+import {cardDispatch} from "../../utils/cardDispatch";
 
 function ProductInfo () {
     const {query} = useRouter ();
@@ -18,30 +17,7 @@ function ProductInfo () {
     const product = useAppSelector ( state => state.productReducer )
     const [productId, setProductId] = useState<string> ( "" );
     useEffect ( () => {
-        if (productId && Object.keys ( user ).length != 0) {
-            cart.every ( item => item.id !== productId ) ?
-                dispatch (
-                    addToCart ( {
-                        //@ts-ignore
-                        userId: jwtDecode ( `${user.accessToken}` ).id,
-                        productId: productId,
-                        price: product.price
-                    } )
-                ) :
-                dispatch ( changeQuantity ( {
-                    //@ts-ignore
-                    userId: jwtDecode ( `${user.accessToken}` ).id,
-                    productId: productId,
-                    //@ts-ignore
-                    quantity: cart.find ( product => product.id == productId ).quantity + 1
-                } ) )
-        } else if (productId) {
-            dispatch ( addToLocalCart ( {
-                id: productId,
-                quantity: 1,
-                price: product.price
-            } ) )
-        }
+        cardDispatch ( cart, product, productId, user, dispatch)
     }, [productId] );
 
     return (

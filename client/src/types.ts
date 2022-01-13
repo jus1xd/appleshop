@@ -4,24 +4,25 @@ export interface MainReducer {
     isLoading: boolean;
     error: string;
 }
-
+export interface IUser {
+    refreshToken: string
+    accessToken: string
+    id : string
+    username: string
+    role: string
+}
+export interface IData {
+    cart?: ICartItem[];
+    username?: string;
+    email: string;
+    password: string;
+}
 export interface AuthReducer {
-    user: {};
+    user?: IUser
     isAuth: boolean;
     isLoading: boolean;
     error: string;
 }
-
-export interface AuthResponse {
-    accessToken: string,
-    refreshToken: string,
-}
-
-export interface IUser {
-    accessToken: string,
-    refreshToken: string,
-}
-
 export interface Product {
     title: string;
     subTitle: string;
@@ -38,12 +39,6 @@ export interface ICartItem {
     price?: number;
     quantity: number
 }
-
-export interface IUser {
-    refreshToken: string
-    accessToken: string
-}
-
 export interface ICartItems {
     img: string;
     name: string;

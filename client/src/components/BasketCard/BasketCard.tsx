@@ -41,25 +41,19 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
                 dispatch (
                     deleteCartItem ( {
                         // @ts-ignore
-                        userId: jwtDecode ( `${userFromDB?.accessToken}` ).id,
+                        userId: jwtDecode ( `${userFromDB.accessToken}` ).id,
                         productId: productId,
                     } )
                 );
             }
         }
     };
-    const onMinusHandler = (
-        quantity: number | undefined,
-        productId: string | undefined
-    ) => {
+    const onMinusHandler = ( quantity: number | undefined, productId: string | undefined ) => {
         if (quantity && productId) {
             setQuantity ( quantity - 1, productId );
         }
     };
-    const onPlusHandler = (
-        quantity: number | undefined,
-        productId: string | undefined
-    ) => {
+    const onPlusHandler = ( quantity: number | undefined, productId: string | undefined ) => {
         if (quantity && productId) {
             setQuantity ( quantity + 1, productId );
         }
@@ -93,7 +87,7 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
                     </div>
                 </div>
             </div>
-            <div className={s.basket_cost}>{cost} ₽</div>
+            <div className={s.basket_cost}>{cost.toLocaleString ( 'ru-RU' )} ₽</div>
         </div>
     );
 }
