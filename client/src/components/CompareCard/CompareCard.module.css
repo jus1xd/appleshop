@@ -1,0 +1,83 @@
+.card {
+  cursor: pointer;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.card_title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 80%;
+  text-align: center;
+}
+
+.card_cost {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+
+  margin-bottom: 15px;
+}
+
+.card img {
+  height: 317px;
+}
+
+.card_photo_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 270px;
+  height: 270px;
+}
+
+.card_btns {
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+}
+
+.main_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: max-content;
+  padding: 11px 25px;
+  height: 45px;
+  background: #253e63;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  transition: 0.2s;
+  color: #ffffff;
+}
+
+.main_btn:hover {
+  background: #1c2f4d;
+}
+
+.icon_btn {
+  background-color: var(--white);
+  border: 2px solid #D25047;
+  padding: 11px;
+}
+
+.icon_btn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.icon_btn img {
+  width: 22px;
+  height: 20px;
+}
