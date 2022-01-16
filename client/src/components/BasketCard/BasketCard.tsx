@@ -17,10 +17,10 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
     const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
     const quantity = cart?.find ( ( e ) => e.id == id )?.quantity;
     const setQuantity = ( quantity: number, productId: string ) => {
-        if (productId && quantity >= 1 && userFromDB !== undefined) {
+        if (productId && quantity >= 1 && Object.keys ( userFromDB! ).length == 0) {
             dispatch (
                 changeQuantity ( {
-                    userId: userFromDB.id,
+                    userId: userFromDB?.id,
                     productId: productId,
                     quantity: quantity,
                 } )
@@ -34,10 +34,10 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
             );
         } else if (productId && quantity == 0) {
             dispatch ( removeFromLocalCart ( productId ) );
-            if (userFromDB !== undefined) {
+            if (Object.keys ( userFromDB! ).length == 0) {
                 dispatch (
                     deleteCartItem ( {
-                        userId: userFromDB.id,
+                        userId: userFromDB?.id,
                         productId: productId,
                     } )
                 );

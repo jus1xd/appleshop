@@ -3,7 +3,7 @@ import {addToLocalCart} from "../store/slices/mainSlice";
 import {ICartItem, IUser, Product} from "../types";
 
 export const cardDispatch = ( cart: ICartItem[], product: Product, productId: string, user: IUser | undefined, dispatch: any ) => {
-    if (productId && user) {
+    if (productId && Object.keys(user!).length !== 0) {
         cart.every((item) => item.id !== productId)
             ? dispatch(
                 addToCart({

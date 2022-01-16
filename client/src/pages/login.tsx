@@ -70,7 +70,7 @@ function loginPage () {
 
     const loginHandler = async ( user: TUser ) => {
         dispatch ( login ( user ) );
-        router.push ( "/" );
+        await router.push ( "/" );
     };
 
     return (
