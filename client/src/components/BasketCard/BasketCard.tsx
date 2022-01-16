@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import s from "./BasketCard.module.css";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import jwtDecode from "jwt-decode";
 import {
     changeQuantity,
     deleteCartItem,
-    getUserCart,
 } from "../../store/actions/fetchProducts";
 import {ICartItems} from "../../types";
 import {
@@ -19,11 +17,10 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
     const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
     const quantity = cart?.find ( ( e ) => e.id == id )?.quantity;
     const setQuantity = ( quantity: number, productId: string ) => {
-        if (productId && quantity >= 1 && Object.keys ( userFromDB ).length != 0) {
+        if (productId && quantity >= 1 && userFromDB !== undefined) {
             dispatch (
                 changeQuantity ( {
-                    // @ts-ignore
-                    userId: jwtDecode ( `${userFromDB?.accessToken}` ).id,
+                    userId: userFromDB.id,
                     productId: productId,
                     quantity: quantity,
                 } )
@@ -37,11 +34,10 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
             );
         } else if (productId && quantity == 0) {
             dispatch ( removeFromLocalCart ( productId ) );
-            if (Object.keys ( userFromDB ).length !== 0) {
+            if (userFromDB !== undefined) {
                 dispatch (
                     deleteCartItem ( {
-                        // @ts-ignore
-                        userId: jwtDecode ( `${userFromDB.accessToken}` ).id,
+                        userId: userFromDB.id,
                         productId: productId,
                     } )
                 );

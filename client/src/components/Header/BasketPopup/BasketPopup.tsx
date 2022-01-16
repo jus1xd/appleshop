@@ -17,7 +17,7 @@ function BasketPopup ( {active, setActive}: BasketPopup ) {
     const dispatch = useAppDispatch ()
     const deleteItemFromPopup = ( productId: string ) => {
         dispatch ( removeFromLocalCart ( productId ) );
-        if (Object.keys ( userFromDB ).length !== 0) {
+        if (userFromDB !== undefined) {
             dispatch (
                 deleteCartItem ( {
                     userId: userFromDB.id,

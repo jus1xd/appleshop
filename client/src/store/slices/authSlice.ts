@@ -56,7 +56,10 @@ export const authSlice = createSlice ( {
             state.isAuth = true;
             state.user = action.payload;
         },
-        [refresh.rejected.type]: async ( state ) => {
+        [refresh.pending.type]: ( state ) => {
+            state.isLoading = true
+        },
+        [refresh.rejected.type]: ( state ) => {
             state.isAuth = false;
             state.user = {} as IUser;
         },

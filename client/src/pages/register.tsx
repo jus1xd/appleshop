@@ -117,7 +117,7 @@ function registerPage() {
 
   const registerHandler = async (user: TUser) => {
     dispatch(register(user));
-    router.push("/");
+    await router.push("/");
   };
 
   return (

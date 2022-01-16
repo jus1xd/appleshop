@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Card from "../components/Card/Card";
 import Header from "../components/Header/Header";
 import Banner from "../components/Banner/Banner";
@@ -10,13 +10,13 @@ import {refresh} from "../store/actions/auth";
 const Index = () => {
     const dispatch = useAppDispatch ();
     const products = useAppSelector ( ( state ) => state.productsReducer.products );
-    const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
+    const userFromDB = useAppSelector ( ( state ) => state.authReducer );
     useEffect ( () => {
         dispatch ( fetchAllProducts () );
-        userFromDB !== undefined ? dispatch ( refresh () ) : ''
+        userFromDB.isAuth ? dispatch ( refresh () ) : ''
     }, [] );
     const cards = products.map ( ( product ) => (
-        <Card user={userFromDB} key={product._id} product={product}/>
+        <Card user={userFromDB.user} key={product._id} product={product}/>
     ) );
     return (
         <>
