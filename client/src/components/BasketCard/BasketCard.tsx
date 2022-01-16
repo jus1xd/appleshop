@@ -17,7 +17,7 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
     const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
     const quantity = cart?.find ( ( e ) => e.id == id )?.quantity;
     const setQuantity = ( quantity: number, productId: string ) => {
-        if (productId && quantity >= 1 && Object.keys ( userFromDB! ).length == 0) {
+        if (productId && quantity >= 1 && Object.keys ( userFromDB! ).length !== 0) {
             dispatch (
                 changeQuantity ( {
                     userId: userFromDB?.id,
