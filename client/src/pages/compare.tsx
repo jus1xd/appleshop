@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import Header from "../components/Header/Header";
-import s from "../styles/Compare.module.css";
-=======
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
@@ -10,7 +5,6 @@ import s from "../styles/Compare.module.css";
 import { getUserCart } from "../store/actions/fetchProducts";
 import jwtDecode from "jwt-decode";
 import CompareCard from "../components/CompareCard/CompareCard";
->>>>>>> 8f30e758de4c1c0cb181588613febdc92cf9b064
 
 const Compare = () => {
 
