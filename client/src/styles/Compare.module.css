@@ -91,3 +91,74 @@
   background-color: rgba(255, 255, 255, 0.704);
   color: #1c2f4d;
 }
+
+.section_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.compare_btn {
+  cursor: pointer;
+  padding: 8px 23px;
+  height: max-content;
+  border: 1px solid #2c4974;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #2c4974;
+  transition: 0.2s;
+}
+
+.compare_btn:hover {
+  color: #fff;
+  background-color: #2c4974;
+}
+
+.product_cards {
+  width: max-content;
+  display: flex;
+  margin-left: auto;
+}
+
+.cards_wrapper {
+  width: 100%;
+  margin-top: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.specs {
+  margin-top: 35px;
+}
+
+.global_spec {
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.sub_spec {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.spec_name {
+  width: max-content;
+}
+
+.spec_value {
+  width: 270px;
+  margin-left: 15px;
+}
+
+.spec_values {
+  display: flex;
+  margin-left: auto;
+}
