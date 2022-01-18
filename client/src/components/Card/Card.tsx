@@ -4,7 +4,7 @@ import s from "./Card.module.css";
 import { Product } from "../../types";
 import { cardDispatch } from "../../utils/cardDispatch";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { addCompareItem } from "../../store/slices/compareSlice";
+import { addCompareItem, removeCompareItem } from "../../store/slices/compareSlice";
 
 interface ICard {
   product: Product;
@@ -49,7 +49,11 @@ function Card({ product, user, compare }: ICard) {
           }
         >
           {compare ? (
-            <img src="../img/icons/delete.svg" alt="" />
+            <img
+              src="../img/icons/delete.svg"
+              alt=""
+              onClick={() => dispatch(removeCompareItem(product))}
+            />
           ) : (
             <img
               src="../img/icons/compare.svg"

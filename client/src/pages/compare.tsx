@@ -16,7 +16,7 @@ const Compare = () => {
   }, []);
 
 
-  const cards = compareItems?.map((product) => (
+  const cards = compareItems.map((product) => (
     <Card
       user={userFromDB.user}
       key={product._id}
@@ -36,7 +36,7 @@ const Compare = () => {
               <div className={s.compare_btn}>Показать различия</div>
             </div>
 
-            {cards ? (
+            {cards.length > 0 ? (
               <>
                 <div className={s.cards_wrapper}>
                   <div className={s.product_cards}>{cards}</div>
@@ -50,11 +50,9 @@ const Compare = () => {
                     </div>
                   </div>
                   <div className={s.sub_spec}>
-                    <div className={s.spec_name}>Серия</div>
+                    <div className={s.spec_name}>Память</div>
                     <div className={s.spec_values}>
-                      <div className={s.spec_value}>iPhone 13</div>
-                      <div className={s.spec_value}>iPhone 13</div>
-                      <div className={s.spec_value}>iPhone 13</div>
+                    {compareItems.map(el => <div className={s.spec_value}>{el.specifications.memory}</div>)}
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CompareReducer, Product } from "../../types";
 
 const initialState: CompareReducer = {
@@ -10,12 +10,10 @@ export const compareSlice = createSlice({
   initialState,
   reducers: {
     addCompareItem(state, action: PayloadAction<Product>) {
-      console.log(current(state))
       state.compareItems.push(action.payload);
-      // console.log(compareSlice.reducer)
     },
     removeCompareItem(state, action: PayloadAction<Product>) {
-      state.compareItems.filter((item) => item._id !== action.payload._id);
+      state.compareItems = state.compareItems.filter((item) => item._id !== action.payload._id);
     },
   },
 });
