@@ -1,13 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { IData, IUser } from "../../types";
+import { CartProduct, IUser } from "../../types";
 
 axios.defaults.withCredentials = true;
 
+interface ILoginData {
+  email: string;
+  password: string;
+}
+
+interface IRegistrationData {
+  username: string;
+  email: string;
+  password: string;
+  cart: CartProduct[];
+}
+
 export const login = createAsyncThunk(
   "login",
-  async ({ email, password }: IData, thunkAPI) => {
-    const res = await axios.post(
+  async ({ email, password }: ILoginData, thunkAPI): Promise<IUser> => {
+    const res = await axios.post<IUser>(
       "http://localhost:5000/auth/login",
       {
         email,
@@ -21,7 +33,7 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "register",
-  async (user: IData, thunkAPI) => {
+  async (user: IRegistrationData, thunkAPI): Promise<IUser> => {
     const res = await axios.post<IUser>(
       "http://localhost:5000/auth/registration",
       {

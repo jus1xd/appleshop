@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import productsReducer from "./slices/mainSlice";
 import productReducer from "./slices/fetchProductSlice";
+import compareReducer from "./slices/compareSlice";
 import authReducer from "./slices/authSlice";
 
 const rootReducer = combineReducers({
   productsReducer,
+  compareReducer,
   productReducer,
   authReducer,
 });
@@ -27,7 +29,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const setupStore = () => {
   return configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {

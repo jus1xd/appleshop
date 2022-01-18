@@ -1,16 +1,16 @@
 import { addToCart, changeQuantity } from "../store/actions/fetchProducts";
 import { addToLocalCart } from "../store/slices/mainSlice";
-import { ICartItem, IUser, Product } from "../types";
+import { CartProduct, IUser, Product } from "../types";
 
 export const cardDispatch = (
-  cart: ICartItem[],
+  cart: CartProduct[],
   product: Product,
   productId: string,
   user: IUser | undefined,
   dispatch: any
 ) => {
   if (productId && Object.keys(user!).length !== 0) {
-    cart.every((item) => item.id !== productId)
+    cart.every((item) => item._id !== productId)
       ? dispatch(
           addToCart({
             userId: user?.id,
@@ -23,13 +23,13 @@ export const cardDispatch = (
             userId: user?.id,
             productId: productId,
             quantity:
-              cart.find((product) => product.id == productId)!.quantity + 1,
+              cart.find((product) => product._id == productId)!.quantity + 1,
           })
         );
   } else if (productId) {
     dispatch(
       addToLocalCart({
-        id: productId,
+        _id: productId,
         quantity: 1,
         price: product.price,
       })

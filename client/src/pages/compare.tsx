@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header/Header";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
-import { fetchAllProducts, getUserCart } from "../store/actions/fetchProducts";
-import jwtDecode from "jwt-decode";
+import { fetchAllProducts } from "../store/actions/fetchProducts";
 import Card from "../components/Card/Card";
 
 import s from "../styles/Compare.module.css";
-import { refresh } from "../store/actions/auth";
 
 const Compare = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.productsReducer.products);
   const userFromDB = useAppSelector((state) => state.authReducer);
+  const compareItems = useAppSelector((state) => state.compareReducer.compareItems)
 
   useEffect(() => {
     dispatch(fetchAllProducts());
-    userFromDB.isAuth ? dispatch(refresh()) : "";
   }, []);
 
-  const cards = products.map((product) => (
+
+  const cards = compareItems?.map((product) => (
     <Card
       user={userFromDB.user}
       key={product._id}
@@ -41,16 +39,22 @@ const Compare = () => {
             {cards ? (
               <>
                 <div className={s.cards_wrapper}>
-                  <div className={s.product_cards}>{cards.slice(0, 3)}</div>
+                  <div className={s.product_cards}>{cards}</div>
                 </div>
                 <div className={s.specs}>
                   <div className={s.global_spec}>Основные характеристики</div>
                   <div className={s.sub_spec}>
                     <div className={s.spec_name}>Серия</div>
                     <div className={s.spec_values}>
-                      <div className={s.spec_value}>iPhone 12</div>
-                      <div className={s.spec_value}>iPhone 12</div>
-                      <div className={s.spec_value}>iPhone 12</div>
+                      {compareItems.map(el => <div className={s.spec_value}>{el.title.slice(6, 15)}</div>)}
+                    </div>
+                  </div>
+                  <div className={s.sub_spec}>
+                    <div className={s.spec_name}>Серия</div>
+                    <div className={s.spec_values}>
+                      <div className={s.spec_value}>iPhone 13</div>
+                      <div className={s.spec_value}>iPhone 13</div>
+                      <div className={s.spec_value}>iPhone 13</div>
                     </div>
                   </div>
                 </div>

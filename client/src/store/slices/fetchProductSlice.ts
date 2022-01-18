@@ -3,15 +3,9 @@ import { Product } from "../../types";
 import { fetchOneProduct } from "../actions/fetchProducts";
 
 const initialState: Product = {
-  title: "",
-  subTitle: "",
-  price: 0,
-  quantity: 0,
-  picture: "",
-  _id: "",
   isLoading: false,
-  error: "",
-};
+  error: '',
+} as Product;
 
 export const fetchProductSlice = createSlice({
   name: "fetchOneProduct",
@@ -25,7 +19,7 @@ export const fetchProductSlice = createSlice({
       (state.title = action.payload.title),
         (state.subTitle = action.payload.subTitle),
         (state.price = action.payload.price),
-        (state.quantity = action.payload.quantity),
+        // (state.quantity = action.payload.quantity),
         (state.picture = action.payload.picture),
         (state._id = action.payload._id);
     },

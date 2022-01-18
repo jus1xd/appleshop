@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICartItem, MainReducer, Product } from "../../types";
+import { CartProduct, MainReducer, Product } from "../../types";
 import {
-  addToCart,
   changeQuantity,
   deleteCartItem,
   fetchAllProducts,
   getUserCart,
 } from "../actions/fetchProducts";
-import { log } from "util";
 
 const initialState: MainReducer = {
   products: [],
@@ -20,28 +18,30 @@ export const mainSlice = createSlice({
   name: "mainSlice",
   initialState,
   reducers: {
-    addToLocalCart(state, action: PayloadAction<ICartItem>) {
+    addToLocalCart(state, action: PayloadAction<CartProduct>) {
       const exitingProduct = state.cart.find(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
       if (exitingProduct) {
         state.cart.map((product) =>
-          product.id === action.payload.id ? (product.quantity += 1) : product
+          product._id === action.payload._id ? (product.quantity += 1) : product
         );
       } else {
         state.cart.push(action.payload);
       }
     },
-    changeLocalQuantity(state, action: PayloadAction<ICartItem>) {
+    changeLocalQuantity(state, action: PayloadAction<CartProduct>) {
       const exitingProduct = state.cart.find(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
       if (exitingProduct) {
         exitingProduct.quantity = action.payload.quantity;
       }
     },
     removeFromLocalCart(state, action: PayloadAction<string>) {
-      state.cart = state.cart.filter((product) => product.id != action.payload);
+      state.cart = state.cart.filter(
+        (product) => product._id != action.payload
+      );
     },
   },
   extraReducers: {
@@ -65,19 +65,19 @@ export const mainSlice = createSlice({
     },
     [changeQuantity.fulfilled.type]: (
       state,
-      action: PayloadAction<ICartItem[]>
+      action: PayloadAction<CartProduct[]>
     ) => {
       state.cart = action.payload;
     },
     [getUserCart.fulfilled.type]: (
       state,
-      action: PayloadAction<ICartItem[]>
+      action: PayloadAction<CartProduct[]>
     ) => {
       state.cart = action.payload;
     },
     [deleteCartItem.fulfilled.type]: (
       state,
-      action: PayloadAction<ICartItem[]>
+      action: PayloadAction<CartProduct[]>
     ) => {
       state.cart = action.payload;
     },
