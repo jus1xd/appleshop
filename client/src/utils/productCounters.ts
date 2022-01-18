@@ -1,6 +1,6 @@
-import {ICartItem} from "../types";
+import {CartProduct} from "../types";
 
-export const productCounters = ( cartItems: ICartItem[], setProductCount: any, setPriceCount: any ) => {
+export const productCounters = ( cartItems: CartProduct[], setProductCount: any, setPriceCount: any ) => {
     if (cartItems.length != 0) {
         setProductCount (
             cartItems
