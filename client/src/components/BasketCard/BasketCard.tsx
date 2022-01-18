@@ -5,13 +5,13 @@ import {
     changeQuantity,
     deleteCartItem,
 } from "../../store/actions/fetchProducts";
-import {ICartItems} from "../../types";
+import {CartProduct} from "../../types";
 import {
     changeLocalQuantity,
     removeFromLocalCart,
 } from "../../store/slices/mainSlice";
 
-function BasketCard ( {img, name, cost, id}: ICartItems ) {
+function BasketCard ( {img, name, price, id}: CartProduct ) {
     const cart = useAppSelector ( ( state ) => state.productsReducer.cart );
     const dispatch = useAppDispatch ();
     const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
@@ -29,6 +29,7 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
             dispatch (
                 changeLocalQuantity ( {
                     id: productId,
+                    price: price,
                     quantity: quantity,
                 } )
             );
@@ -83,7 +84,7 @@ function BasketCard ( {img, name, cost, id}: ICartItems ) {
                     </div>
                 </div>
             </div>
-            <div className={s.basket_cost}>{cost.toLocaleString ( 'ru-RU' )} ₽</div>
+            <div className={s.basket_cost}>{price.toLocaleString ( 'ru-RU' )} ₽</div>
         </div>
     );
 }

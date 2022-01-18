@@ -8,17 +8,27 @@ import {ApiError} from "../exceptions/api-error";
 
 class UserService {
     async registration ( username, email, password, role, cart ) {
-        const candidate = await UserModel.findOne ( {email} )
+        const candidate = await UserModel.findOne ( {email} );
         if (candidate) {
-            throw ApiError.BadRequest ( 'Пользователь с таким email уже существует' )
+            throw ApiError.BadRequest ( "Пользователь с таким email уже существует" );
         }
-        const hashPassword = await bcrypt.hash ( password, 3 )
-        const activationLink = uuid.v4 ()
-        const user = await UserModel.create ( {username, email, password: hashPassword, activationLink, cart, role} )
-        await sendActivationMail ( email, `${process.env.API_URL}auth/activate/${activationLink}` );
-        const userDto = new UserDto ( user )
-        const tokens = tokenService.generateTokens ( {...userDto} )
-        await tokenService.saveToken ( userDto.id, tokens.refreshToken )
+        const hashPassword = await bcrypt.hash ( password, 3 );
+        const activationLink = uuid.v4 ();
+        const user = await UserModel.create ( {
+            username,
+            email,
+            password: hashPassword,
+            activationLink,
+            cart,
+            role,
+        } );
+        await sendActivationMail (
+            email,
+            `${process.env.API_URL}auth/activate/${activationLink}`
+        );
+        const userDto = new UserDto ( user );
+        const tokens = tokenService.generateTokens ( {...userDto} );
+        await tokenService.saveToken ( userDto.id, tokens.refreshToken );
         return {...tokens, ...userDto};
     }
 
@@ -84,7 +94,8 @@ class UserService {
     async changeQuantity ( idForServerQuantity ) {
         const updatedUser = await UserModel.findById ( idForServerQuantity.userId );
         updatedUser.cart.filter (
-            ( item ) => item.id === idForServerQuantity.productId )[0].quantity = idForServerQuantity.quantity;
+            ( item ) => item.id === idForServerQuantity.productId
+        )[0].quantity = idForServerQuantity.quantity;
         const user = await UserModel.findByIdAndUpdate (
             idForServerQuantity.userId,
             updatedUser,

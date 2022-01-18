@@ -7,6 +7,10 @@
   margin-bottom: 50px;
 }
 
+.card.compare {
+  margin-left: 15px;
+}
+
 .card_title {
   font-weight: 600;
   font-size: 16px;
@@ -81,3 +85,12 @@
   width: 22px;
   height: 20px;
 }
+
+.remove_btn {
+  border: 2px solid #D25047;
+}
+
+.remove_btn:hover {
+  border: 2px solid #d2504700;
+}
+

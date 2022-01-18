@@ -20,19 +20,21 @@ const Basket = () => {
             if (products.length === 0) {
                 dispatch ( fetchAllProducts () );
             }
-            dispatch ( getUserCart ( userFromDB?.id ) )
+            dispatch ( getUserCart ( userFromDB?.id ) );
         }
     }, [] );
     useEffect ( () => {
-        productCounters ( cartItems, setProductCount, setPriceCount )
+        productCounters ( cartItems, setProductCount, setPriceCount );
     }, [cartItems] );
+    console.log ( cartItems )
     const basketItems = products
         .filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) )
         .map ( ( product ) => (
             <BasketCard
+                quantity={0}
                 img={product.picture}
                 name={product.title}
-                cost={product.price}
+                price={product.price}
                 id={product._id}
                 key={product._id}
             />
@@ -61,8 +63,7 @@ const Basket = () => {
                                     <div className={s.payment_total}>
                                         <div className={s.payment_subtitle}>Итого:</div>
                                         <div className={s.total}>
-                                            {priceCount.toLocaleString ( 'ru-RU' )}
-                                            ₽
+                                            {priceCount.toLocaleString ( "ru-RU" )}₽
                                         </div>
                                     </div>
                                 </div>
@@ -76,9 +77,7 @@ const Basket = () => {
                         </div>
                     ) : (
                         <div className={s.error_wrapper}>
-                            <div className={s.error_icon}>( o ^ ^ )
-                                o
-                            </div>
+                            <div className={s.error_icon}>( o ^ ^ ) o</div>
                             <div className={s.error_title}>Корзина пуста</div>
                             <div className={s.error_subtitle}>
                                 Чтобы добавить товары в корзину, кликните на кнопку “В корзину”

@@ -14,7 +14,7 @@ function BasketPopup ( {active, setActive}: BasketPopup ) {
     const cartItems = useAppSelector ( ( state ) => state.productsReducer.cart );
     const products = useAppSelector ( ( state ) => state.productsReducer.products );
     const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
-    const dispatch = useAppDispatch ()
+    const dispatch = useAppDispatch ();
     const deleteItemFromPopup = ( productId: string ) => {
         dispatch ( removeFromLocalCart ( productId ) );
         if (userFromDB !== undefined) {
@@ -25,20 +25,27 @@ function BasketPopup ( {active, setActive}: BasketPopup ) {
                 } )
             );
         }
-    }
+    };
     const popupItems = products
         .filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) )
         .map ( ( product ) => (
             <div key={product._id} className={s.basket_item}>
                 <div className={s.item_leftside}>
-                    <img src={`http://localhost:5000/${product.picture}`} alt="productIMG"/>
-                    <div className={s.item_title}>
-                        {product.title}
-                    </div>
+                    <img
+                        src={`http://localhost:5000/${product.picture}`}
+                        alt="productIMG"
+                    />
+                    <div className={s.item_title}>{product.title}</div>
                 </div>
                 <div className={s.item_rightside}>
-                    <div className={s.item_cost}>{product.price.toLocaleString ( 'ru-RU' )}</div>
-                    <img src="../img/header/remove.svg" alt="" onClick={() => deleteItemFromPopup ( product._id )}/>
+                    <div className={s.item_cost}>
+                        {product.price.toLocaleString ( "ru-RU" )}
+                    </div>
+                    <img
+                        src="../img/header/remove.svg"
+                        alt=""
+                        onClick={() => deleteItemFromPopup ( product._id )}
+                    />
                 </div>
             </div>
         ) );
@@ -58,12 +65,15 @@ function BasketPopup ( {active, setActive}: BasketPopup ) {
                 <div className={s.total}>
                     <div className={s.popup_btn}>Купить</div>
                     <div className={s.total_summ}>
-                        Итого: <span>{
-                        cartItems
-                            .map ( ( item ) => item.quantity * item.price! )
-                            .reduce ( ( previousValue: number, currentValue: number ) => {
-                                return previousValue + currentValue;
-                            } ).toLocaleString ( `ru-RU` )}</span>
+                        Итого:{" "}
+                        <span>
+              {cartItems
+                  .map ( ( item ) => item.quantity * item.price! )
+                  .reduce ( ( previousValue: number, currentValue: number ) => {
+                      return previousValue + currentValue;
+                  } )
+                  .toLocaleString ( `ru-RU` )}
+            </span>
                     </div>
                 </div>
             </div>
