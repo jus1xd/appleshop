@@ -5,17 +5,17 @@ import {
   changeQuantity,
   deleteCartItem,
 } from "../../store/actions/fetchProducts";
-import { ICartItems } from "../../types";
+import { CartProduct } from "../../types";
 import {
   changeLocalQuantity,
   removeFromLocalCart,
 } from "../../store/slices/mainSlice";
 
-function BasketCard({ img, name, cost, id }: ICartItems) {
+function BasketCard({ img, name, price, _id }: CartProduct) {
   const cart = useAppSelector((state) => state.productsReducer.cart);
   const dispatch = useAppDispatch();
   const userFromDB = useAppSelector((state) => state.authReducer.user);
-  const quantity = cart?.find((e) => e.id == id)?.quantity;
+  const quantity = cart?.find((e) => e._id == _id)?.quantity;
   const setQuantity = (quantity: number, productId: string) => {
     if (productId && quantity >= 1 && Object.keys(userFromDB!).length !== 0) {
       dispatch(
@@ -28,7 +28,8 @@ function BasketCard({ img, name, cost, id }: ICartItems) {
     } else if (productId && quantity >= 1) {
       dispatch(
         changeLocalQuantity({
-          id: productId,
+          _id: productId,
+          price: price,
           quantity: quantity,
         })
       );
@@ -75,7 +76,7 @@ function BasketCard({ img, name, cost, id }: ICartItems) {
           <div className={s.basket_counter}>
             <img
               onClick={() =>
-                onPlusHandler(quantity, cart?.find((e) => e._id == id)?._id)
+                onPlusHandler(quantity, cart?.find((e) => e._id == _id)?._id)
               }
               src="../img/basket/plus.svg"
             />
@@ -83,13 +84,13 @@ function BasketCard({ img, name, cost, id }: ICartItems) {
             <img
               src="../img/basket/minus.svg"
               onClick={() =>
-                onMinusHandler(quantity, cart?.find((e) => e._id == id)?._id)
+                onMinusHandler(quantity, cart?.find((e) => e._id == _id)?._id)
               }
             />
           </div>
         </div>
       </div>
-      <div className={s.basket_cost}>{cost.toLocaleString("ru-RU")} ₽</div>
+      <div className={s.basket_cost}>{price.toLocaleString("ru-RU")} ₽</div>
     </div>
   );
 }

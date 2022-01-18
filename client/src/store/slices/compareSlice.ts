@@ -13,7 +13,9 @@ export const compareSlice = createSlice({
       state.compareItems.push(action.payload);
     },
     removeCompareItem(state, action: PayloadAction<Product>) {
-      state.compareItems = state.compareItems.filter((item) => item._id !== action.payload._id);
+      state.compareItems = state.compareItems.filter(
+        (item) => item._id !== action.payload._id
+      );
     },
   },
 });

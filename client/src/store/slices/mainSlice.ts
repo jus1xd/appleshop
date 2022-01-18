@@ -24,7 +24,10 @@ export const mainSlice = createSlice({
       );
       if (exitingProduct) {
         state.cart.map((product) =>
-          product._id === action.payload._id ? (product.quantity += 1) : product
+          product._id === action.payload._id
+            ? // @ts-ignore
+              (product.quantity += 1)
+            : product
         );
       } else {
         state.cart.push(action.payload);
