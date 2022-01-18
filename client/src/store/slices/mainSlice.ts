@@ -20,14 +20,11 @@ export const mainSlice = createSlice({
   reducers: {
     addToLocalCart(state, action: PayloadAction<CartProduct>) {
       const exitingProduct = state.cart.find(
-        (product) => product._id === action.payload._id
+        (product) => product.id === action.payload.id
       );
       if (exitingProduct) {
         state.cart.map((product) =>
-          product._id === action.payload._id
-            ? // @ts-ignore
-              (product.quantity += 1)
-            : product
+          product.id === action.payload.id ? (product.quantity += 1) : product
         );
       } else {
         state.cart.push(action.payload);
@@ -35,16 +32,14 @@ export const mainSlice = createSlice({
     },
     changeLocalQuantity(state, action: PayloadAction<CartProduct>) {
       const exitingProduct = state.cart.find(
-        (product) => product._id === action.payload._id
+        (product) => product.id === action.payload.id
       );
       if (exitingProduct) {
         exitingProduct.quantity = action.payload.quantity;
       }
     },
     removeFromLocalCart(state, action: PayloadAction<string>) {
-      state.cart = state.cart.filter(
-        (product) => product._id != action.payload
-      );
+      state.cart = state.cart.filter((product) => product.id != action.payload);
     },
   },
   extraReducers: {
