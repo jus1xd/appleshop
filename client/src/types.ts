@@ -23,14 +23,12 @@ export interface AuthReducer {
 
 export interface CompareReducer {
     compareItems: Product[];
-    isLoading?: boolean;
-    error?: string;
 }
 
 export interface CartProduct {
-    _id: string;
+    id: string;
     price: number;
-    quantity?: number;
+    quantity: number;
     img?: string,
     name?: string,
 }
