@@ -11,11 +11,11 @@ import {
     removeFromLocalCart,
 } from "../../store/slices/mainSlice";
 
-function BasketCard ( {img, name, price, _id}: CartProduct ) {
+function BasketCard ( {img, name, price, id}: CartProduct ) {
     const cart = useAppSelector ( ( state ) => state.productsReducer.cart );
     const dispatch = useAppDispatch ();
     const userFromDB = useAppSelector ( ( state ) => state.authReducer.user );
-    const quantity = cart?.find ( ( e ) => e._id == _id )?.quantity;
+    const quantity = cart?.find ( ( e ) => e.id == id )?.quantity;
     const setQuantity = ( quantity: number, productId: string ) => {
         if (productId && quantity >= 1 && Object.keys ( userFromDB! ).length !== 0) {
             dispatch (
@@ -28,7 +28,7 @@ function BasketCard ( {img, name, price, _id}: CartProduct ) {
         } else if (productId && quantity >= 1) {
             dispatch (
                 changeLocalQuantity ( {
-                    _id: productId,
+                    id: productId,
                     price: price,
                     quantity: quantity,
                 } )
@@ -70,7 +70,7 @@ function BasketCard ( {img, name, price, _id}: CartProduct ) {
                     <div className={s.basket_counter}>
                         <img
                             onClick={() =>
-                                onPlusHandler ( quantity, cart?.find ( ( e ) => e._id == _id )?._id )
+                                onPlusHandler ( quantity, cart?.find ( ( e ) => e.id == id )?.id )
                             }
                             src="../img/basket/plus.svg"
                         />
@@ -78,7 +78,7 @@ function BasketCard ( {img, name, price, _id}: CartProduct ) {
                         <img
                             src="../img/basket/minus.svg"
                             onClick={() =>
-                                onMinusHandler ( quantity, cart?.find ( ( e ) => e._id == _id )?._id )
+                                onMinusHandler ( quantity, cart?.find ( ( e ) => e.id == id )?.id )
                             }
                         />
                     </div>

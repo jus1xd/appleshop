@@ -26,14 +26,16 @@ const Basket = () => {
     useEffect ( () => {
         productCounters ( cartItems, setProductCount, setPriceCount );
     }, [cartItems] );
+    console.log ( cartItems )
     const basketItems = products
-        .filter ( ( {_id} ) => cartItems.some ( ( product ) => product._id === _id ) )
+        .filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) )
         .map ( ( product ) => (
             <BasketCard
+                quantity={0}
                 img={product.picture}
                 name={product.title}
                 price={product.price}
-                _id={product._id}
+                id={product._id}
                 key={product._id}
             />
         ) );
