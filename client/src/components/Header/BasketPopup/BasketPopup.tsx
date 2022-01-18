@@ -27,7 +27,7 @@ function BasketPopup({ active, setActive }: BasketPopup) {
     }
   };
   const popupItems = products
-    .filter(({ _id }) => cartItems.some((product) => product.id === _id))
+    .filter(({ _id }) => cartItems.some((product) => product._id === _id))
     .map((product) => (
       <div key={product._id} className={s.basket_item}>
         <div className={s.item_leftside}>
