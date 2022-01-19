@@ -27,7 +27,7 @@ function BasketPopup({ active, setActive }: BasketPopup) {
     }
   };
   const popupItems = products
-    .filter(({ _id }) => cartItems.some((product) => product._id === _id))
+    .filter(({ _id }) => cartItems.some((product) => product.id === _id))
     .map((product) => (
       <div key={product._id} className={s.basket_item}>
         <div className={s.item_leftside}>
@@ -56,21 +56,25 @@ function BasketPopup({ active, setActive }: BasketPopup) {
       onMouseOut={() => setActive(false)}
     >
       <div className={active ? `${s.wrapper} ${s.active}` : s.wrapper}>
-        <div className={s.items}>{popupItems}</div>
+        <div className={s.items}>
+          {popupItems.length > 0 ? (
+            popupItems
+          ) : (
+            <div className={s.basket_empty}>Корзина пуста</div>
+          )}
+        </div>
         <div className={s.total}>
           <div className={s.popup_btn}>Купить</div>
           <div className={s.total_summ}>
-            Итого:
-            {
-              <span>
-                {cartItems
-                  .map((item) => item.quantity * item.price)
-                  .reduce((previousValue: number, currentValue: number) => {
-                    return previousValue + currentValue;
-                  })
-                  .toLocaleString(`ru-RU`)}
-              </span>
-            }
+            Итого:{" "}
+            <span>
+              {cartItems
+                .map((item) => item.quantity * item.price!)
+                .reduce((previousValue: number, currentValue: number) => {
+                  return previousValue + currentValue;
+                })
+                .toLocaleString(`ru-RU`)}
+            </span>
           </div>
         </div>
       </div>
