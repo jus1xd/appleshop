@@ -26,7 +26,6 @@ const Basket = () => {
     useEffect ( () => {
         productCounters ( cartItems, setProductCount, setPriceCount );
     }, [cartItems] );
-    console.log ( cartItems )
     const basketItems = products
         .filter ( ( {_id} ) => cartItems.some ( ( product ) => product.id === _id ) )
         .map ( ( product ) => (

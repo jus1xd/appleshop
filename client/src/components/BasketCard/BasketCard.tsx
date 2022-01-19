@@ -33,9 +33,9 @@ function BasketCard ( {img, name, price, id}: CartProduct ) {
                     quantity: quantity,
                 } )
             );
-        } else if (productId && quantity == 0) {
+        } else if (productId && quantity === 0) {
             dispatch ( removeFromLocalCart ( productId ) );
-            if (Object.keys ( userFromDB! ).length == 0) {
+            if (Object.keys ( !userFromDB ).length === 0) {
                 dispatch (
                     deleteCartItem ( {
                         userId: userFromDB?.id,
