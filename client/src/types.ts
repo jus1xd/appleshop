@@ -33,6 +33,21 @@ export interface CartProduct {
   name?: string;
 }
 
+interface Review {
+  review: {
+    authorID: string;
+    comment: string;
+    rating: number;
+    date: Date;
+    usageTime: string;
+    replies: {
+      author: string;
+      comment: string;
+      date: Date;
+    };
+  };
+}
+
 export interface Product {
   _id: string;
   title: string;
@@ -46,46 +61,92 @@ export interface Product {
     4: string;
   };
   specifications: {
-    color: string;
-    bodyMaterial: string;
-    protect: string;
-    protectType: string;
-    gradeIP: string;
-    versionOS: string;
-    CPU: string;
-    Kernels: number;
-    cpuFrequency: string;
-    technicalProcess: string;
-    memory: string;
-    mainCameras: number;
-    mainCamerasMegapixels: string;
-    mainCamerasAperture: string;
-    videoFormat: string;
-    videoResolutionFrequency: string;
-    doubleFrontCamera: string;
-    frontCameraMegapixels: string;
-    frontCameraAperture: string;
-    autofocus: string;
-    headphonesIncluded: string;
-    chargerIncluded: string;
-    chargerType: string;
-    fastCharge: string;
-    wirelessCharge: string;
-    musicWorkingTime: string;
-    videoWorkingTime: string;
-    width: string;
-    height: string;
-    thickness: string;
-    weight: string;
-    guarantee: string;
-    producerCountries: string;
-    producerCode: string;
-    releaseYear: string;
-    screenDiagonal: string;
-    screenResolution: string;
-    pixelDensity: string;
-    screenTechnologyType: string;
+    common: {
+      guarantee: string;
+      producer: string;
+      series: string;
+      type: string;
+      model: string;
+      releaseYear: string;
+
+      producerCountries: string;
+      producerCode: string;
+    };
+    appearance: {
+      bodyMaterial: string;
+      color: string;
+    };
+    screen: {
+      screenDiagonal: string;
+      screenResolution: string;
+      pixelDensity: string;
+      screenTechnologyType: string;
+    };
+    system: {
+      versionOS: string;
+      CPU: string;
+      Kernels: number;
+      cpuFrequency: string;
+      technicalProcess: string;
+      memory: string;
+    };
+    protection: {
+      protectType: string;
+      protect: string;
+      gradeIP: string;
+    };
+    mainCamera: {
+      mainCameras: number;
+      mainCamerasMegapixels: string;
+      mainCamerasAperture: string;
+      opticalStabilization: string;
+      autofocus: string;
+    };
+    frontCamera: {
+      doubleFrontCamera: string;
+      frontCameraMegapixels: string;
+      frontCameraAperture: string;
+      autofocus: string;
+    };
+    videoCapture: {
+      videoFormat: string;
+      videoResolutionFrequency: string;
+    };
+    audio: {
+      stereo: string;
+      audioFormats: string;
+    };
+    communications: {
+      bluetooth: string;
+      nfc: string;
+    };
+    mobileConnection: {
+      lteFreq: string;
+      simFormat: string;
+      eSim: string;
+      simsCount: string;
+    };
+    size: {
+      width: string;
+      height: string;
+      thickness: string;
+      weight: string;
+    };
+
+    battery: {
+      chargerType: string;
+      fastCharge: string;
+      wirelessCharge: string;
+      musicWorkingTime: string;
+      videoWorkingTime: string;
+    };
+    package: {
+      headphonesIncluded: string;
+      chargerIncluded: string;
+      complectation: string;
+    };
   };
+  reviews: Review[];
   isLoading?: boolean;
   error?: string;
 }
