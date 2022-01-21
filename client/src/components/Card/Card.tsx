@@ -4,7 +4,10 @@ import s from "./Card.module.css";
 import { Product } from "../../types";
 import { cardDispatch } from "../../utils/cardDispatch";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { addCompareItem } from "../../store/slices/compareSlice";
+import {
+  addCompareItem,
+  removeCompareItem,
+} from "../../store/slices/compareSlice";
 
 interface ICard {
   product: Product;
@@ -41,23 +44,25 @@ function Card({ product, user, compare }: ICard) {
         <div className={s.main_btn} onClick={() => setProductId(product._id)}>
           В корзину
         </div>{" "}
-        <div
-          className={
-            compare
-              ? `${s.main_btn} ${s.icon_btn} ${s.remove_btn}`
-              : `${s.main_btn} ${s.icon_btn}`
-          }
-        >
-          {compare ? (
-            <img src="../img/icons/delete.svg" alt="" />
-          ) : (
+        {compare ? (
+          <div
+            className={`${s.main_btn} ${s.icon_btn} ${s.remove_btn}`}
+            onClick={() => dispatch(removeCompareItem(product))}
+          >
             <img
-              src="../img/icons/compare.svg"
+              src="../img/icons/delete.svg"
               alt=""
-              onClick={() => dispatch(addCompareItem(product))}
+              onClick={() => dispatch(removeCompareItem(product))}
             />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div
+            className={`${s.main_btn} ${s.icon_btn}`}
+            onClick={() => dispatch(addCompareItem(product))}
+          >
+            <img src="../img/icons/compare.svg" alt="" />
+          </div>
+        )}
       </div>
     </div>
   );

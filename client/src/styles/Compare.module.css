@@ -143,22 +143,3 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.sub_spec {
-  display: flex;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.spec_name {
-  width: max-content;
-}
-
-.spec_value {
-  width: 270px;
-  margin-left: 15px;
-}
-
-.spec_values {
-  display: flex;
-  margin-left: auto;
-}
