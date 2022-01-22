@@ -1,36 +1,37 @@
-import Product, { IProduct } from "../models/productModel";
+import {Product} from '../../client/src/types'
+import productModel from "../models/productModel";
 import fileService from "./fileService";
 
 class ProductService {
-  async create(product: IProduct, picture: string) {
+  async create(product: Product, picture: string) {
     const fileName = fileService.saveFile(picture);
-    return await Product.create({ ...product, picture: fileName });
+    return await productModel.create({ ...product, picture: fileName });
   }
 
   async getAll() {
-    return Product.find();
+    return productModel.find();
   }
 
   async getOne(id: string) {
-    const product = await Product.findById(id);
+    const product = await productModel.findById(id);
     if (!id) {
       throw new Error("Id не указан");
     }
     return product;
   }
 
-  async update(product: IProduct) {
+  async update(product: Product) {
     if (!product._id) {
       throw new Error("Id не указан");
     }
-    return Product.findByIdAndUpdate(product._id, product, { new: true });
+    return productModel.findByIdAndUpdate(product._id, product, { new: true });
   }
 
   async delete(id: string) {
     if (!id) {
       throw new Error("не указан ID");
     }
-    return Product.findByIdAndDelete(id);
+    return productModel.findByIdAndDelete(id);
   }
 }
 

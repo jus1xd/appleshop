@@ -99,7 +99,20 @@
 }
 
 .logo {
-  margin-top: 5px;
+  /* margin-top: 5px; */
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 26px;
+}
+
+.fy_moment {
+  font-weight: 200;
+}
+
+.logo_wrapper {
+  background: linear-gradient(90deg, #1a3f75, #347676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .btn_container {

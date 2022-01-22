@@ -1,3 +1,5 @@
+import orderRouter from "../Routers/orderRouter";
+
 require ( "dotenv" ).config ();
 import express from "express";
 import mongoose from "mongoose";
@@ -21,6 +23,7 @@ app.options ( '*', cors ( corsConfig ) );
 app.use ( fileUpload () );
 app.use ( "/api", productRouter );
 app.use ( "/auth", userRouter );
+app.use('/products', orderRouter)
 app.use ( errorMiddleware );
 
 const startApp = async () => {

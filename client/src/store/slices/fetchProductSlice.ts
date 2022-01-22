@@ -19,7 +19,6 @@ export const fetchProductSlice = createSlice({
       (state.title = action.payload.title),
         (state.subTitle = action.payload.subTitle),
         (state.price = action.payload.price),
-        // (state.quantity = action.payload.quantity),
         (state.picture = action.payload.picture),
         (state._id = action.payload._id);
     },

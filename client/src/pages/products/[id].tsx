@@ -9,7 +9,6 @@ export default function () {
       <Header />
       <section className={s.product}>
         <div className={s.container}>
-          <div className={s.section_title}>Страница товара</div>
           <ProductInfo />
         </div>
       </section>
