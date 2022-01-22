@@ -1,0 +1,136 @@
+/* header  */
+
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  position: relative;
+  min-height: 70px;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--white-op);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px -6px 31px rgba(0, 0, 0, 0.15);
+  z-index: 99;
+}
+
+.header_inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon_container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  height: 22px;
+  width: 24px;
+}
+
+.icon_container img {
+  margin-bottom: auto;
+}
+
+.nav_item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  margin-left: 27px;
+  transition: 0.2s;
+  color: #253e63;
+}
+
+.nav_item:hover {
+  opacity: 0.8;
+}
+
+.nav_item div {
+  margin-top: 5px;
+}
+
+.logo {
+  /* margin-top: 5px; */
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 26px;
+}
+
+.fy_moment {
+  font-weight: 200;
+}
+
+.logo_wrapper {
+  background: linear-gradient(90deg, #1a3f75, #347676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn_container {
+  display: flex;
+  margin: 0 20px;
+  align-items: center;
+  height: 100%;
+}
+
+.main_btn {
+  text-align: center;
+  cursor: pointer;
+  width: max-content;
+  padding: 13px 50px;
+  background: #253e63;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  transition: 0.2s;
+  color: #ffffff;
+}
+
+.main_btn:hover {
+  background: #1c2f4d;
+}
+
+.sec_btn {
+  background-color: #fff;
+  color: #1c2f4d;
+}
+
+.sec_btn:hover {
+  background-color: rgba(255, 255, 255, 0.904);
+  color: #1c2f4d;
+}
+
+.profile_btn img {
+  margin-top: -2px;
+}
+
+.crm_nav_item {
+  margin-right: 50px;
+  font-size: 16px;
+  transition: .2s;
+  color: #253e63;
+}
+
+.crm_nav_item:hover {
+  opacity: .8;
+}

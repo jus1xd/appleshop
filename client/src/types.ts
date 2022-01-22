@@ -33,7 +33,7 @@ export interface CartProduct {
   name?: string;
 }
 
-interface Review {
+export interface Review {
   review: {
     authorID: string;
     comment: string;
@@ -68,7 +68,6 @@ export interface Product {
       type: string;
       model: string;
       releaseYear: string;
-
       producerCountries: string;
       producerCode: string;
     };
@@ -143,7 +142,7 @@ export interface Product {
     package: {
       headphonesIncluded: string;
       chargerIncluded: string;
-      complectation: string;
+      complictation: string;
     };
   };
   reviews: Review[];
