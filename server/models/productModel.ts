@@ -6,7 +6,7 @@ const ProductModel = new Schema<Product> ( {
     subTitle: String,
     price: {type: Number, required: true},
     picture: {type: String, required: true},
-    reviews: [{} as Review],
+    reviews: {type : [{} as Review], default: []},
     previewPicture: {
         1: String,
         2: String,
@@ -16,9 +16,8 @@ const ProductModel = new Schema<Product> ( {
     specifications: {
         common: {
             guarantee: {type: String, required: true},
-            producer: String,
-            type: String,
-            model: String,
+            series: String,
+            category: String,
             releaseYear: String,
             producerCountries: String,
             producerCode: String,
@@ -93,7 +92,7 @@ const ProductModel = new Schema<Product> ( {
         package: {
             headphonesIncluded: String,
             chargerIncluded: String,
-            complication: String,
+            complectation: String,
         },
     },
 } )

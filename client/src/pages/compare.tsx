@@ -72,9 +72,7 @@ const Compare = () => {
     function translate (): any {
         return Object.keys ( translateSpecs ).map ( ( el ) => `${translateSpecs[el]}` );
     }
-
     translate ();
-
     const renderSpecifications = () => {
         const specs: Record<string, string[]> = {};
         const result: JSX.Element[] = [];
@@ -85,11 +83,12 @@ const Compare = () => {
             }
         } );
         for (const key in specs) {
-            result.push ( <SpecItem key={key} specValue={specs[key]} translatedSpecItem={key}/> );
+            result.push ( <SpecItem key={Math.random()} specValue={specs[key]} translatedSpecItem={key}/> );
         }
-        return result;
+        console.log (result)
+      return result
     };
-
+    renderSpecifications()
     return (
         <>
             <Header/>
@@ -107,7 +106,7 @@ const Compare = () => {
                                 </div>
                                 <div className={s.specs}>
                                     <div className={s.global_spec}>Основные характеристики</div>
-                                    {renderSpecifications ()}
+                                    {}
                                 </div>
                             </>
                         ) : (

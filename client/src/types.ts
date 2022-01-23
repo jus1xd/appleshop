@@ -58,15 +58,13 @@ export interface Product {
         1: string;
         2: string;
         3: string;
-        4: string;
     };
     specifications: {
         common: {
             guarantee: string;
             producer: string;
             series: string;
-            type: string;
-            model: string;
+            category: string,
             releaseYear: string;
             producerCountries: string;
             producerCode: string;
@@ -142,7 +140,7 @@ export interface Product {
         package: {
             headphonesIncluded: string;
             chargerIncluded: string;
-            complication: string;
+            complectation: string;
         };
     };
     reviews: Review[];
