@@ -82,6 +82,7 @@
 .logo_wrapper {
   background: linear-gradient(90deg, #1a3f75, #347676);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
