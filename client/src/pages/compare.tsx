@@ -111,9 +111,9 @@ const Compare = () => {
     const result: JSX.Element[] = [];
     compareItems.map((el: any) => {
       for (let i = 0; i < Object.keys(el.specifications).length; i++) {
-        console.log('eeee', Object.getOwnPropertyDescriptor(el.specifications));
+        console.log('for', el.specifications);
         for (const key in el.specifications[i]) {
-          console.log('fdsfs', el.specifications[i]);
+          console.log('for in for', el.specifications[i]);
           if (!specs[translateSpecs[key]]) specs[translateSpecs[key]] = [];
           specs[translateSpecs[key]].push(el.specifications[key] || '');
         }
