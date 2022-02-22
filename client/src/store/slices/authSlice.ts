@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AuthReducer, IUser} from "../../types";
 import {login, logout, refresh, register} from "../actions/auth";
-import axios from "axios";
 
 const initialState: AuthReducer = {
     user: {} as IUser,
@@ -62,22 +61,7 @@ export const authSlice = createSlice ( {
         },
         [refresh.rejected.type]: ( state ) => {
             state.isAuth = false;
-            axios.interceptors.response.use ( ( config ) => {
-                return config;
-            }, async ( error ) => {
-                const originalRequest = error.config;
-                if (error.response.status == 401 && error.config && !error.config._isRetry) {
-                    originalRequest._isRetry = true;
-                    try {
-                        const response = await axios.get ( `http://localhost:5000/auth/refresh` )
-                        state.user = response.data;
-                        return axios.request ( originalRequest );
-                    } catch (e) {
-                        console.log ( 'НЕ АВТОРИЗОВАН' )
-                    }
-                }
-                throw error;
-            } )
+            state.user = {} as IUser;
         },
     },
 } );

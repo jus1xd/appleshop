@@ -3,7 +3,6 @@ import Header from "../components/Header/Header";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {fetchAllProducts} from "../store/actions/fetchProducts";
 import Card from "../components/Card/Card";
-
 import s from "../styles/Compare.module.css";
 import SpecItem from "../components/SpecItem/SpecItem";
 
