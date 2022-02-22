@@ -5,13 +5,13 @@ import Header from "../components/Header/Header";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { register } from "../store/actions/auth";
 import s from "../styles/Auth.module.css";
-import { ICartItem } from "../types";
+import { CartProduct } from "../types";
 
 type TUser = {
   username: string;
   email: string;
   password: string;
-  cart: ICartItem[];
+  cart: CartProduct[];
 };
 
 function registerPage() {

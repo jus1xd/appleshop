@@ -5,9 +5,9 @@ import s from '../styles/AdminPanel.module.css';
 const AdminPanel: React.FC = ({}): JSX.Element => {
   return (
     <div>
-        <CrmHeader />
+      <CrmHeader />
     </div>
   );
-}
+};
 
 export default AdminPanel;
