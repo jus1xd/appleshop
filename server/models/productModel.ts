@@ -15,7 +15,7 @@ const ProductModel = new Schema<Product>({
   },
   specifications: {
     common: {
-      guarantee: { type: String, required: true },
+      guarantee: { type: String },
       series: String,
       category: String,
       releaseYear: String,

@@ -38,7 +38,7 @@ function ProductInfo() {
             <div className={s.prod_subtitle}>{product.subTitle}</div>
             <div className={s.prod_title}>Характеристики</div>
             <div className={s.spec_title}>Общие характеристики</div>
-            <div className={s.spec_wrapper}>
+            {/* <div className={s.spec_wrapper}>
               <div className={s.spec_condit}>Операционная система:</div>
               <div className={s.spec_value}>iOS</div>
             </div>
@@ -75,6 +75,56 @@ function ProductInfo() {
             <div className={s.spec_wrapper}>
               <div className={s.spec_condit}>Количество ядер:</div>
               <div className={s.spec_value}>8</div>
+            </div> */}
+
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Площадь помещения, м2:</div>
+              <div className={s.spec_value}>до 30</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Производительность холод, кВт:</div>
+              <div className={s.spec_value}>3,2</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Производительность тепло, кВт:</div>
+              <div className={s.spec_value}>3,4</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Потребляемая мощн. тепло, Вт:</div>
+              <div className={s.spec_value}>942</div>
+            </div>
+            {/* <div className={s.spec_title}>Экран</div> */}
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Номинальный ток холод, А:</div>
+              <div className={s.spec_value}>4,5</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Номинальный ток тепло, А:</div>
+              <div className={s.spec_value}>4,4	</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Звуковое давление внутр. блока, Дб(А):</div>
+              <div className={s.spec_value}>42/37/35/28	</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Размеры внутреннего блока, мм:</div>
+              <div className={s.spec_value}>790х200х275	</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Размеры наружного блока, мм:</div>
+              <div className={s.spec_value}>735х340х540</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Межблочный кабель, жил/мм:</div>
+              <div className={s.spec_value}>4/2,5</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Диапазон рабочих темп на холод/тепло, гр.С:</div>
+              <div className={s.spec_value}>-15~48/-15~24</div>
+            </div>
+            <div className={s.spec_wrapper}>
+              <div className={s.spec_condit}>Расстояние между лап внеш. блока, мм:</div>
+              <div className={s.spec_value}>450</div>
             </div>
           </div>
         </div>

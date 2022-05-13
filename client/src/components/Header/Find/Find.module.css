@@ -36,6 +36,10 @@
   transition: 0.2s;
 }
 
+.find_inner {
+  overflow: scroll;
+}
+
 .find_item:hover {
   background: rgba(44, 73, 116, 0.1);
 }

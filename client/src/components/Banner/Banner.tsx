@@ -6,9 +6,10 @@ interface IBanner {
   title: string;
   subtitle: string;
   type: string;
+  textColor?: string
 }
 
-function Banner({ url, title, subtitle, type }: IBanner) {
+function Banner({ url, title, subtitle, type, textColor }: IBanner) {
   return (
     <div className={s.wrapper}>
       {type === "mp4" ? (
@@ -20,9 +21,9 @@ function Banner({ url, title, subtitle, type }: IBanner) {
           controls={false}
         />
       ) : (
-        <img src={`../img/afisha/${url}.png`} />
+        <img src={`../img/afisha/${url}.${type}`} />
       )}
-      <div className={s.ban_title}>
+      <div className={s.ban_title} style={{color: `${textColor}`}}>
         {title} <span>{subtitle}</span>
       </div>
     </div>

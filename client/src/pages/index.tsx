@@ -29,7 +29,7 @@ const Index = () => {
       <section className={s.intro}>
         <div className={s.intro_inner}>
           <div className={s.intro_head}>
-            <h2 className={s.intro_text}>iPhone 13 Pro</h2>
+            <h2 className={s.intro_text}>КОНДИЦИОНЕРЫ <span className={s.green}>GREEN</span></h2>
             <h3 className={s.intro_subtext}>Просто. Нереально</h3>
           </div>
         </div>
@@ -37,21 +37,22 @@ const Index = () => {
       <section className={s.heatsells}>
         <div className={s.container}>
           <div className={s.section_title}>Хиты продаж</div>
-          <div className={s.heat_inner}>{cards.slice(0, 8)}</div>
+          <div className={s.heat_inner}>{cards.slice(12, 16)}</div>
           <Banner
-            url="airpods"
-            title="Попробуйте"
-            subtitle="AirPods"
-            type="mp4"
-          />
-          <div className={s.heat_inner}>{cards.slice(8, 16)}</div>
-          <Banner
-            url="macbook"
-            title="Попробуйте"
-            subtitle="MacBook"
+            url="5"
+            textColor="white"
+            title="Не пробуйте"
+            subtitle="плохой климат"
             type="png"
           />
-          <div className={s.heat_inner}>{cards.slice(16)}</div>
+          <div className={s.heat_inner}>{cards.slice(16, 20)}</div>
+          <Banner
+            url="3"
+            title="Попробуйте"
+            subtitle="GREEN"
+            type="png"
+          />
+          <div className={s.heat_inner}>{cards.slice(20, 24)}</div>
         </div>
       </section>
     </>
